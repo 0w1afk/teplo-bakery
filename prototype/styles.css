@@ -343,6 +343,7 @@ blockquote {
 .timeline {
   list-style: none;
   margin: 0;
+  padding: 0;
 }
 
 .milestone {
@@ -438,6 +439,7 @@ a:hover { background-size: 100% 1px; }
 
 .menu-strip {
   list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
@@ -498,6 +500,7 @@ a:hover { background-size: 100% 1px; }
 
 .baker-grid {
   list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
