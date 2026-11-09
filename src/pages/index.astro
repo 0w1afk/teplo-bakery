@@ -26,56 +26,56 @@ const milestones = [
     src: processLeaven,
     time: '21:00',
     title: 'Закваска',
-    text: 'Кормим мукой первого помола, оставляем до утра.',
+    text: 'Добавляем в закваску муку и воду. Оставляем до утра.',
   },
   {
     id: 'ph-process-mix',
     src: processMix,
     time: '10:00',
     title: 'Замес',
-    text: 'Руками, пока тесто не станет гладким.',
+    text: 'Замешиваем тесто вручную, пока оно не станет гладким.',
   },
   {
     id: 'ph-process-cold',
     src: processCold,
     time: '11:00',
-    title: 'Холод',
-    text: '+4 °C, восемнадцать часов. Тесто набирает вкус, мякиш становится пористым.',
+    title: 'Расстойка',
+    text: 'Ставим тесто в холодильник на 18 часов при +4 °C.',
   },
   {
     id: 'ph-process-bake',
     src: processBake,
     time: '05:00',
-    title: 'Печь',
-    text: 'Каменный под, 250 °C. К открытию первая партия на прилавке.',
+    title: 'Выпечка',
+    text: 'Выпекаем хлеб на каменном поду при 250 °C. К открытию первая партия готова.',
   },
 ]
 
 const menu = [
-  { id: 'ph-menu-temny', src: menuTemny, name: '«Тёмный»', desc: 'ржаной, солод, кориандр', price: '520 ₽', alt: 'Тёмный ржаной хлеб с кориандром на крафт-бумаге' },
-  { id: 'ph-menu-pervy', src: menuPervy, name: '«Хлеб»', desc: 'пшеничный на закваске', price: '480 ₽', alt: 'Пшеничный хлеб на закваске с крестообразным надрезом' },
-  { id: 'ph-menu-polba', src: menuPolba, name: '«Полба»', desc: 'с мёдом', price: '560 ₽', alt: 'Овальная полбяная буханка с медовым блеском' },
-  { id: 'ph-menu-celozernovy', src: menuCelozernovy, name: '«Целозерновой»', desc: 'свежемолотая пшеница', price: '540 ₽', alt: 'Целозерновой хлеб в оболочке из зёрен и семян' },
-  { id: 'ph-menu-zavarnoy', src: menuZavarnoy, name: '«Заварной»', desc: 'бородинский, тмин', price: '500 ₽', alt: 'Плотный тёмный заварной хлеб с кориандром' },
-  { id: 'ph-menu-baget', src: menuBaget, name: 'Багет «Наутро»', desc: 'до девяти, потом нет', price: '220 ₽', alt: 'Багет с диагональными надрезами на крафт-бумаге' },
-  { id: 'ph-menu-croissant', src: menuCroissant, name: 'Круассан', desc: 'масло 82,5%', price: '280 ₽', alt: 'Круассан со слоёной спиралью и хлопьями теста' },
-  { id: 'ph-menu-pletyonka', src: menuPletyonka, name: '«Плетёнка»', desc: 'корица, тростниковый сахар, горячая в 8:30', price: '320 ₽', alt: 'Плетёнка-узел с корицей и сахаром' },
+  { id: 'ph-menu-temny', src: menuTemny, name: '«Тёмный»', desc: 'Ржаной хлеб с солодом и кориандром', price: '520 ₽', alt: 'Тёмный ржаной хлеб с кориандром на крафт-бумаге' },
+  { id: 'ph-menu-pervy', src: menuPervy, name: '«Хлеб»', desc: 'Пшеничный хлеб на закваске', price: '480 ₽', alt: 'Пшеничный хлеб на закваске с крестообразным надрезом' },
+  { id: 'ph-menu-polba', src: menuPolba, name: '«Полба»', desc: 'Хлеб из полбы с мёдом', price: '560 ₽', alt: 'Овальная буханка из полбы' },
+  { id: 'ph-menu-celozernovy', src: menuCelozernovy, name: '«Цельнозерновой»', desc: 'Из свежемолотой пшеницы', price: '540 ₽', alt: 'Цельнозерновой хлеб с зёрнами и семенами на корке' },
+  { id: 'ph-menu-zavarnoy', src: menuZavarnoy, name: '«Заварной»', desc: 'Бородинский хлеб с тмином', price: '500 ₽', alt: 'Буханка заварного хлеба с тёмной коркой' },
+  { id: 'ph-menu-baget', src: menuBaget, name: 'Багет «Наутро»', desc: 'В продаже до 9:00. Может закончиться раньше.', price: '220 ₽', alt: 'Багет с диагональными надрезами на крафт-бумаге' },
+  { id: 'ph-menu-croissant', src: menuCroissant, name: 'Круассан', desc: 'На сливочном масле жирностью 82,5 %', price: '280 ₽', alt: 'Круассан с тонкими слоями теста' },
+  { id: 'ph-menu-pletyonka', src: menuPletyonka, name: '«Плетёнка»', desc: 'С корицей и тростниковым сахаром', price: '320 ₽', alt: 'Плетёнка-узел с корицей и сахаром' },
 ]
 
 const bakers = [
-  { id: 'ph-baker-anna', src: bakerAnna, name: 'Анна Соколова', role: 'утренняя выпечка, круассаны.', alt: 'Анна Соколова формует круассаны за припыленным деревянным столом' },
-  { id: 'ph-baker-dmitry', src: bakerDmitry, name: 'Дмитрий Кузнецов', role: 'замес, холодная расстойка.', alt: 'Дмитрий Кузнецов поднимает большую массу теста над столом' },
-  { id: 'ph-baker-olga', src: bakerOlga, name: 'Ольга Морозова', role: 'заварные, «Плетёнка».', alt: 'Ольга Морозова смазывает глазируемую плетёнку кистью' },
+  { id: 'ph-baker-anna', src: bakerAnna, name: 'Анна Соколова', role: 'Работает в утреннюю смену и печёт круассаны.', alt: 'Анна Соколова формует круассаны на деревянном столе, присыпанном мукой' },
+  { id: 'ph-baker-dmitry', src: bakerDmitry, name: 'Дмитрий Кузнецов', role: 'Замешивает тесто и следит за расстойкой.', alt: 'Дмитрий Кузнецов поднимает тесто со стола' },
+  { id: 'ph-baker-olga', src: bakerOlga, name: 'Ольга Морозова', role: 'Готовит заварное тесто и плетёт булочки с корицей.', alt: 'Ольга Морозова смазывает плетёнку кисточкой' },
 ]
 
 const heroAlt =
-  'Смятая кремовая бумага с мукой; в правом нижнем углу — четверть круглого пшеничного хлеба с лепестковыми надрезами'
+  'Круглый пшеничный хлеб на бумаге, присыпанной мукой'
 const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 1920], format: 'webp', alt: heroAlt })
 ---
 
 <Base
-  title="Тепло — крафтовая пекарня на закваске. Москва"
-  description="Хлеб на закваске без спешки: мука, вода, соль и сутки ожидания. Печём каждый день с 8:00, Ржанская набережная, 4."
+  title="«Тепло» — домашняя пекарня в Москве"
+  description="Хлеб на закваске, круассаны и плетёнки с корицей. Москва, Ржанская набережная, 4. Открыто ежедневно с 8:00 до 20:00."
 >
   <a class="skip-link" href="#main">К содержанию</a>
 
@@ -85,19 +85,19 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       Тепло
     </a>
     <nav class="site-nav" id="siteNav" aria-label="Разделы">
-      <a href="#craft">Ремесло</a>
-      <a href="#process">Печь</a>
-      <a href="#menu">Хлеб</a>
+      <a href="#craft">О хлебе</a>
+      <a href="#process">Как печём</a>
+      <a href="#menu">Выпечка</a>
       <a href="#baker">Кто печёт</a>
       <a href="#visit">Как найти</a>
     </nav>
-    <a class="header-cta" href="#visit">Прийти на запах</a>
+    <a class="header-cta" href="#visit">Адрес и часы</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">Меню</button>
   </header>
 
   <main id="main">
     <!-- Тепло — обложка -->
-    <section class="hero" id="hero" data-section="hero" aria-label="Тепло — пекарня на закваске">
+    <section class="hero" id="hero" data-section="hero" aria-label="Домашняя пекарня «Тепло»">
       <picture class="ph hero-bg" id="ph-hero-paper">
         <source
           media="(max-width: 767px)"
@@ -116,42 +116,33 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
           fetchpriority="high"
         />
       </picture>
-      <p class="hero-foot mono-line">крафтовая пекарня · с 2021 года</p>
+      <p class="hero-foot mono-line">Москва · с 2021 года</p>
       <div class="hero-inner">
         <h1 class="hero-word">Тепло</h1>
-        <a class="scroll-cue" href="#craft" aria-label="Пролистать вниз">
+        <a class="scroll-cue" href="#craft" aria-label="О нашем хлебе">
           <span class="scroll-cue-track" aria-hidden="true"><span class="scroll-cue-dot"></span></span>
         </a>
       </div>
       <div class="hero-bottom">
-        <p class="hero-sub">Пекарня на закваске. Москва.</p>
-        <p class="mono-line">печём каждое утро · с 8 до 20 · Ржанская набережная, 4</p>
+        <p class="hero-sub">Домашняя пекарня.</p>
+        <p class="mono-line">Ржанская набережная, 4 · ежедневно с 8:00 до 20:00</p>
       </div>
     </section>
 
     <!-- Глава 2. Мука, вода, соль -->
     <section class="chapter" id="craft" data-section="craft" aria-labelledby="craft-title">
-      <p class="kicker">01 · ремесло</p>
-      <h2 id="craft-title">Мука, вода, соль. И&nbsp;восемнадцать часов.</h2>
+      <h2 id="craft-title">Пшеничный хлеб на закваске</h2>
       <div class="spread">
         <div class="spread-text">
-          <p>
-            В «Хлебе» три ингредиента — мука, вода, соль. Всё остальное — время: закваска работает
-            ночью, тесто дозревает в холоде. В&nbsp;остальных буханках — только то, что требует вкус:
-            солод и кориандр в «Тёмном», мёд в «Полбе», корица в «Плетёнке».
-          </p>
-          <blockquote>«Хлеб» — список из&nbsp;трёх слов и&nbsp;сутки ожидания</blockquote>
-          <p>
-            Расписание тут жёстче меню и не сдвигается ради спроса. Зато каждое утро в восемь на
-            прилавке лежит буханка с хрустящей коркой, тёплым мякишем и кислинкой, за которую не стыдно.
-          </p>
+          <p>Наш пшеничный так и называется — «Хлеб». В нём только мука, вода и соль.
+            У него хрустящая корка и чуть кисловатый мякиш.</p>
         </div>
         <figure class="spread-figure">
           <Image
             class="photo ratio-45 parallax"
             id="ph-craft-crust"
             src={craftCrust}
-            alt="Крупный план хрустящей ржаво-рыжей корки пшеничного хлеба с пористым мякишем"
+            alt="Корка и пористый мякиш пшеничного хлеба"
             width={800}
             height={1000}
             format="avif"
@@ -164,9 +155,8 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
 
     <!-- Глава 3. Расписание одной буханки -->
     <section class="chapter" id="process" data-section="process" aria-labelledby="process-title">
-      <p class="kicker">02 · расписание</p>
-      <h2 id="process-title">Как мы делаем</h2>
-      <p class="chapter-intro">Четыре вехи и сутки с&nbsp;хвостом между первой и&nbsp;последней.</p>
+      <h2 id="process-title">Как мы печём хлеб</h2>
+      <p class="chapter-intro">Вечером кормим закваску. Через 32 часа ставим хлеб в печь.</p>
 
       <div class="bench">
         <div class="bench-scale" aria-hidden="true">
@@ -189,7 +179,7 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
                 class="photo square mini"
                 id={m.id}
                 src={m.src}
-                alt={`Фото: ${m.title}`}
+                alt=""
                 width={480}
                 height={480}
                 loading="lazy"
@@ -207,8 +197,7 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
 
     <!-- Глава 4. Сегодня в печи -->
     <section class="chapter" id="menu" data-section="menu" aria-labelledby="menu-title">
-      <p class="kicker">03 · сегодня в печи</p>
-      <h2 id="menu-title">Сегодня в&nbsp;печи</h2>
+      <h2 id="menu-title">Хлеб и выпечка</h2>
 
       <ul class="menu-strip">
         {menu.map((item) => (
@@ -229,13 +218,12 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
         ))}
       </ul>
 
-      <p class="menu-note">Печём каждый день: вчерашнего хлеба у&nbsp;нас не&nbsp;бывает.</p>
-      <a class="cta" href="#visit">Прийти до 20:00</a>
+      <p class="menu-note">Хлеб выкладываем к открытию, в 8:00. Круассаны и плетёнки готовы к 8:30.</p>
+      <a class="cta" href="#visit">Где нас найти</a>
     </section>
 
     <!-- Глава 5. Кто печёт -->
     <section class="chapter" id="baker" data-section="baker" aria-labelledby="baker-title">
-      <p class="kicker">04 · кто печёт</p>
       <h2 id="baker-title">Кто печёт</h2>
       <ul class="baker-grid">
         {bakers.map((b) => (
@@ -258,22 +246,20 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
 
     <!-- Глава 6. Как найти -->
     <section class="chapter" id="visit" data-section="visit" aria-labelledby="visit-title">
-      <p class="kicker">05 · адрес</p>
       <h2 id="visit-title">Как найти</h2>
       <div class="spread">
         <div class="spread-text">
-          <p>Москва, Ржанская набережная, 4. Серый дом, белая вывеска на&nbsp;углу.</p>
-          <p>Каждый день 8:00–20:00. Тёплый хлеб — с&nbsp;8:00, круассаны — с&nbsp;8:30, багеты — пока не&nbsp;кончатся.</p>
-          <p class="visit-note">Запах доведёт.</p>
+          <p>Москва, Ржанская набережная, 4.</p>
+          <p>Открыто каждый день с 8:00 до 20:00.</p>
           <div class="visit-actions">
             <a class="cta js-route" href="#visit" aria-describedby="visit-map-note">Открыть маршрут</a>
             <a class="cta cta-ghost" href="tel:+74950000000">Позвонить</a>
           </div>
-          <p class="mono-line route-hint" id="route-hint" hidden>Пекарня вымышленная — маршрута пока нет.</p>
-          <p class="mono-line" id="visit-map-note">ссылки-заглушки: маршрут и телефон фиктивные</p>
+          <p class="mono-line route-hint" id="route-hint" hidden>У этого адреса нет маршрута на карте.</p>
+          <p class="mono-line" id="visit-map-note">Сайт сделан для портфолио. Адрес и телефон вымышлены.</p>
         </div>
         <figure class="spread-figure">
-          <svg class="map" id="ph-map" viewBox="0 0 800 450" role="img" aria-label="Схема проезда: Ржанская набережная, 4 — серый дом с белой вывеской на углу">
+          <svg class="map" id="ph-map" viewBox="0 0 800 450" role="img" aria-label="Пекарня на схеме Ржанской набережной">
             <rect width="800" height="450" fill="#F6EFE3"></rect>
             <path d="M0 362 C 210 330 430 332 820 384 L 820 450 L 0 450 Z" fill="#BFC9C2"></path>
             <g stroke="#FFF9EE" stroke-width="16" fill="none">
@@ -295,14 +281,14 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
             </g>
             <text x="468" y="418" font-family="'JetBrains Mono', monospace" font-size="13" letter-spacing="2" fill="#22190F">РЖАНСКАЯ НАБЕРЕЖНАЯ, 4</text>
           </svg>
-          <figcaption class="mono-line">Багет вместо стрелки: ищите белую вывеску на углу.</figcaption>
+          <figcaption class="mono-line">Ищите серый дом с белой вывеской на углу.</figcaption>
         </figure>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p class="mono-line">Тепло · печём каждый день · с 2021 года</p>
+    <p class="mono-line">Домашняя пекарня «Тепло»</p>
   </footer>
 
   <script>
