@@ -1,4 +1,4 @@
-/* Базовый слой + дизайн-система «Мука» (brief/DESIGN.md, схема A «Корка»). */
+/* Базовый слой + дизайн-система «Тепло» (brief/DESIGN.md, схема A «Корка»). */
 
 :root {
   /* Палитра A «Корка» */
@@ -56,6 +56,9 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
   .milestone.is-dimmed .mini { opacity: 1; }
+  /* Статичный кадр: точка иконки скролла замирает на середине, часы на осях — статичные метки */
+  .scroll-cue-dot { animation: none; transform: translateY(14px) rotate(45deg); }
+  .bench-current, .bench-marker { display: none; }
 }
 
 /* Ссылки в тексте отличимы не только цветом (a11y link-in-text-block) */
@@ -181,7 +184,12 @@ html.lenis, html.lenis body { height: auto; }
   margin: 0;
 }
 
-.hero-inner { flex: 1; display: flex; align-items: center; }
+.hero-inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
 .hero-word {
   font-family: var(--font-display);
@@ -191,12 +199,50 @@ html.lenis, html.lenis body { height: auto; }
   letter-spacing: -0.02em;
 }
 
+/* ——— Иконка скролла внизу по центру обложки ——— */
+
+.scroll-cue {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  z-index: 1;
+}
+
+.scroll-cue-track {
+  display: block;
+  width: 2px;
+  height: 40px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--muted) 40%, transparent);
+  position: relative;
+}
+
+.scroll-cue-dot {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  animation: cue-fall 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes cue-fall {
+  0% { transform: translateY(0) rotate(45deg); }
+  72% { transform: translateY(28px) rotate(45deg); }
+  100% { transform: translateY(28px) rotate(45deg); }
+}
+
 .hero-bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 24px;
-  border-top: 1px solid var(--line);
+  flex-direction: column;
+  align-items: start;
+  gap: 6px;
+  border-top: 1px solid var(--muted);
   padding-top: 20px;
 }
 
@@ -214,8 +260,6 @@ html.lenis, html.lenis body { height: auto; }
   text-transform: uppercase;
   color: var(--muted);
 }
-
-.hero-right { display: flex; gap: 16px; align-items: center; }
 
 /* ——— CTA ——— */
 
@@ -343,7 +387,23 @@ figure img { width: 100%; height: auto; }
   color: var(--text);
 }
 
-.bench-clock-end { margin-top: auto; color: var(--muted); }
+/* Стартовое время закреплено, пока глава «Как мы делаем» в кадре */
+.bench-clock-start {
+  position: sticky;
+  top: 84px;
+  z-index: 2;
+  background: var(--bg);
+  padding: 4px 8px;
+}
+
+.bench-clock-end {
+  margin-top: auto;
+  color: var(--muted);
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  padding: 4px 8px;
+}
 
 .bench-axis {
   flex: 1;
@@ -351,7 +411,7 @@ figure img { width: 100%; height: auto; }
   background: var(--line);
   position: relative;
 }
-.bench-axis span {
+.bench-axis .tick {
   position: absolute;
   left: 50%;
   width: 9px;
@@ -359,20 +419,40 @@ figure img { width: 100%; height: auto; }
   transform: translateX(-50%) rotate(45deg);
   background: var(--accent);
 }
-.bench-axis span:nth-of-type(2) { top: 4%; }
-.bench-axis span:nth-of-type(3) { top: 34%; }
-.bench-axis span:nth-of-type(4) { top: 63%; }
-.bench-axis span:nth-of-type(5) { bottom: 4%; }
+.bench-axis .t1 { top: 4%; }
+.bench-axis .t2 { top: 34%; }
+.bench-axis .t3 { top: 63%; }
+.bench-axis .t4 { bottom: 4%; }
 
 .bench-marker {
   position: absolute;
   left: 50%;
+  top: calc(var(--p, 0) * 100%);
   width: 15px;
   height: 15px;
   transform: translate(-50%, -50%) rotate(45deg);
   background: var(--text);
   border: 2px solid var(--bg);
   z-index: 1;
+}
+
+/* Текущее время едет вдоль оси рядом с маркером */
+.bench-current {
+  position: absolute;
+  left: calc(50% + 18px);
+  top: calc(var(--p, 0) * 100%);
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text);
+}
+.bench-current .day {
+  display: inline;
+  margin: 0;
+  font-size: 11px;
 }
 
 .timeline { list-style: none; margin: 0; padding: 0; }
@@ -547,7 +627,6 @@ figure img { width: 100%; height: auto; }
 
   .hero { padding: 0 20px 24px; }
   .hero-foot { top: 16px; right: 20px; }
-  .hero-bottom { flex-direction: column; align-items: start; gap: 16px; }
 
   .chapter { padding: 64px 20px; }
   .spread { grid-template-columns: 1fr; gap: 24px; }

@@ -1,6 +1,7 @@
-/* Анимации сайта «Мука» (этап 5, brief/PROTOTYPE.md).
-   Режимы: reveal — toggle; параллакс и выходы за сетку — scrub; пульт — scrub.
-   prefers-reduced-motion: статичный кадр, GSAP-сцены не создаются.
+/* Анимации сайта «Тепло».
+   Fade-эффектов нет: текст и фото статичны при входе в кадр.
+   Остались: параллакс фото и выходы за сетку (scrub), «пульт» главы «Как мы делаем» (scrub).
+   prefers-reduced-motion: GSAP-сцены не создаются, статичный кадр.
    Smooth scroll (Lenis) инициализируется в Base.astro отдельно (скилл lenis-scroll). */
 
 import { gsap } from 'gsap'
@@ -53,18 +54,19 @@ function clockParts(min: number) {
 }
 
 const bench = document.querySelector<HTMLElement>('.bench')
-const clockTime = document.getElementById('benchClockTime')
-const clockDay = document.getElementById('benchClockDay')
-const marker = document.querySelector<HTMLElement>('.bench-marker')
+const axis = document.querySelector<HTMLElement>('.bench-axis')
+const currentTime = document.getElementById('benchCurrentTime')
+const currentDay = document.getElementById('benchCurrentDay')
 const milestones = gsap.utils.toArray<HTMLElement>('.milestone')
 
 function setBench(progress: number) {
-  if (!clockTime || !clockDay || !marker) return
+  if (!axis || !currentTime || !currentDay) return
   const min = START + progress * SPAN
   const parts = clockParts(min)
-  clockTime.textContent = parts.time
-  clockDay.textContent = parts.day
-  marker.style.top = `${progress * 100}%`
+  currentTime.textContent = parts.time
+  currentDay.textContent = parts.day
+  // Позиция маркера и текущего времени — одно свойство на оси
+  axis.style.setProperty('--p', progress.toFixed(4))
   let best = 0
   STOPS.forEach((stop, i) => {
     if (Math.abs(min - stop) < Math.abs(min - STOPS[best]!)) best = i
@@ -80,43 +82,10 @@ function setBench(progress: number) {
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 if (prefersReduced) {
-  // Статичный кадр: главы полностью читаемы, GSAP-сцены не создаются
-  if (bench && clockTime && clockDay) {
-    clockTime.textContent = '21:00 → 05:00'
-    clockDay.textContent = 'день 1 → день 3'
-    milestones.forEach((m) => m.classList.add('is-active'))
-  }
+  // Статичный кадр: вехи полноконтрастны, часы на осях — статичные метки 21:00 / 05:00
+  milestones.forEach((m) => m.classList.add('is-active'))
 } else {
-  // 1. Reveal текста — toggle: играет при входе, откатывается при уходе назад
-  gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
-    gsap.from(el, {
-      opacity: 0,
-      y: 24,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none reverse',
-      },
-    })
-  })
-
-  // Карточки меню — одна группа со stagger
-  gsap.from('.menu-card', {
-    opacity: 0,
-    y: 24,
-    duration: 0.7,
-    stagger: 0.08,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.menu-strip',
-      start: 'top 85%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-
-  // 2. Параллакс фото — scrub, ±14px
+  // 1. Параллакс фото — scrub, ±14px
   gsap.utils.toArray<HTMLElement>('.parallax').forEach((el) => {
     gsap.fromTo(
       el,
@@ -134,7 +103,7 @@ if (prefersReduced) {
     )
   })
 
-  // 3. Выход за сетку — scrub: блок доезжает из «внутри» в «навылет»
+  // 2. Выход за сетку — scrub: блок доезжает из «внутри» в «навылет»
   gsap.fromTo(
     '.spread-figure',
     { y: 90 },
@@ -154,7 +123,7 @@ if (prefersReduced) {
     },
   )
 
-  // 4. Пульт — scrub: часы, маркер, подсветка активной вехи
+  // 3. Пульт — scrub: текущее время рядом с маркером, вехи подсвечиваются
   setBench(0)
   if (bench) {
     ScrollTrigger.create({
