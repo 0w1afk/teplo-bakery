@@ -1,0 +1,29 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  lang?: string
+}
+const { title, description, lang = 'ru' } = Astro.props
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Шрифты: self-host в public/fonts + <link rel="preload" as="font" crossorigin> для display-гарнитуры -->
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { initSmoothScroll } from '../scripts/smooth-scroll'
+      initSmoothScroll()
+    </script>
+  </body>
+</html>

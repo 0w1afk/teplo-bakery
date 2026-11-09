@@ -1,0 +1,24 @@
+---
+// Заглушка до согласования брифа. Структура глав — из раздела 4 брифа.
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="flour-bakery" description="flour-bakery — сайт в разработке">
+  <main>
+    <section data-section="intro" class="chapter">
+      <h1>flour-bakery</h1>
+      <p>Бриф: <code>brief/BRIEF.md</code></p>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .chapter {
+    min-height: 100svh;
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+  }
+</style>

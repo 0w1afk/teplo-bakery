@@ -1,0 +1,30 @@
+{
+  "name": "flour-bakery",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "metrics": "npm run build && FORM=mobile STATIC_DIR=dist lhci autorun && FORM=desktop STATIC_DIR=dist lhci autorun && node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --budgets metrics/budgets.json --out metrics/scroll-desktop.json && node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --mobile --cpu 4 --budgets metrics/budgets.json --out metrics/scroll-mobile.json"
+  },
+  "dependencies": {
+    "astro": "7.4.2",
+    "@astrojs/react": "7.1.1",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "gsap": "3.15.0",
+    "@gsap/react": "2.1.2",
+    "lenis": "1.3.27",
+    "motion": "14.6.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@lhci/cli": "0.15.1",
+    "playwright": "1.64.1",
+    "@astrojs/check": "0.9.12"
+  }
+}

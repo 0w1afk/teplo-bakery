@@ -1,0 +1,69 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Сгенерировано из site-fabric@f9c988c. Общие правила и скиллы — по ссылке на среду.
+  "instructions": ["/Users/olegsmirnov/Projects/site-fabric/AGENTS.md"],
+  "skills": ["/Users/olegsmirnov/Projects/site-fabric/.claude/skills"],
+  // Скиллы лежат в .claude/skills/ (OpenCode читает эту папку для совместимости).
+  // Правила проекта: AGENTS.md. Список и обоснование инструментов: TOOLS.md.
+  // Версии локальных серверов закреплены; обновлять осознанно (TOOLS.md, раздел B).
+  "mcp": {
+    "servers": {
+      // Дизайн → код. OAuth: `opencode mcp auth figma`. Starter: ~20 вызовов чтения/мес.
+      "figma": {
+        "type": "remote",
+        "url": "https://mcp.figma.com/mcp"
+      },
+      // Документация Motion (бесплатная часть AI Kit, без аккаунта).
+      "motion": {
+        "type": "remote",
+        "url": "https://mcp.motion.dev",
+        "oauth": false
+      },
+      // Свежая документация библиотек (Lenis, drei, R3F, Tailwind 4 …).
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "oauth": false
+      },
+      // Blender: требуется запущенный Blender с аддоном (N-панель → MCP for Blender → Start).
+      // ⚠️ Выполняет произвольный Python — работать только с копиями .blend.
+      "blender": {
+        "type": "local",
+        "command": ["uvx", "mcp-for-blender@2.2.4"],
+        "environment": {
+          "BLENDER_HOST": "localhost",
+          "BLENDER_PORT": "9876",
+          "DISABLE_TELEMETRY": "true"
+        }
+      },
+      // GLB → R3F (gltfjsx), анализ и оптимизация моделей.
+      // Стартует медленно (npx + тяжёлые зависимости) → увеличенный таймаут запуска, мс.
+      "three": {
+        "type": "local",
+        "command": ["npx", "-y", "mcp-three@0.1.4"],
+        "timeout": { "startup": 90000 }
+      },
+      // Инспекция живой сцены Three.js/R3F (нужна открытая вкладка).
+      // ⚠️ Поднимает прокси перед dev-сервером на ВСЕХ сетевых интерфейсах (адрес не настраивается) →
+      // выключен по умолчанию; включать на время работы над 3D, лучше в доверенной сети.
+      // BRIDGE_PORT: по умолчанию 9222 = порт отладки Chrome, поэтому закрепляем свой.
+      "threejs-devtools": {
+        "type": "local",
+        "command": ["npx", "-y", "threejs-devtools-mcp@0.5.0"],
+        "environment": { "BRIDGE_PORT": "9333" },
+        "disabled": true
+      },
+      // Трейсы производительности, Lighthouse (a11y/SEO/BP), консоль, сеть. Нужен Google Chrome.
+      "chrome-devtools": {
+        "type": "local",
+        "command": ["npx", "-y", "chrome-devtools-mcp@1.12.0"]
+      },
+      // Визуальные проверки и runtime-метрики скролла. Пересекается с chrome-devtools → включать по необходимости.
+      "playwright": {
+        "type": "local",
+        "command": ["npx", "-y", "@playwright/mcp@0.0.84"],
+        "disabled": true
+      }
+    }
+  }
+}
