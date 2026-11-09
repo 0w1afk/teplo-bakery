@@ -1,0 +1,6 @@
+/* Шрифты подключаются асинхронно (Base.astro: media="print" → all):
+   первая волна загрузки остаётся за LCP-кадром, текст до свапа — fallback-шрифтом. */
+@import '@fontsource-variable/literata/opsz.css';
+@import '@fontsource-variable/literata/opsz-italic.css';
+@import '@fontsource-variable/golos-text';
+@import '@fontsource-variable/jetbrains-mono';

@@ -23,7 +23,7 @@ export function initSmoothScroll(): () => void {
     const target = document.querySelector(id)
     if (!target) return
     e.preventDefault()
-    lenis.scrollTo(target as HTMLElement)
+    lenis.scrollTo(target as HTMLElement, { offset: -72 })
   }
   document.addEventListener('click', onAnchor)
 

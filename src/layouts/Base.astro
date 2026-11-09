@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import fontsCss from '../styles/fonts.css?url'
 
 interface Props {
   title: string
@@ -7,6 +8,7 @@ interface Props {
   lang?: string
 }
 const { title, description, lang = 'ru' } = Astro.props
+const fontsHref = typeof fontsCss === 'string' ? fontsCss : fontsCss.url
 ---
 
 <!doctype html>
@@ -16,14 +18,27 @@ const { title, description, lang = 'ru' } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <!-- Шрифты: self-host в public/fonts + <link rel="preload" as="font" crossorigin> для display-гарнитуры -->
+    <!-- Шрифты грузим ПОСЛЕ window.load: на slow 4G они не делят полосу с LCP-кадром (534KB).
+         До свапа — системные fallback-шрифты. -->
+    <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
   </head>
   <body>
     <slot />
     <script>
       import { initSmoothScroll } from '../scripts/smooth-scroll'
       initSmoothScroll()
+    </script>
+    <script is:inline data-fonts-href={fontsHref}>
+      window.addEventListener('load', () => {
+        const self = document.currentScript ?? document.querySelector('script[data-fonts-href]')
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = self?.dataset.fontsHref ?? ''
+        document.head.appendChild(link)
+      })
     </script>
   </body>
 </html>
