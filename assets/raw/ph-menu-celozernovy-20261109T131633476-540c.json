@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:16:33.478Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of a wheat loaf completely rolled in mixed whole grains and seeds — cracked wheat, sunflower seeds, flax — the grains crisp and separate on the crust, standing on crumpled kraft paper. 50mm lens, f/4, focus on the grain texture. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props.",
+  "n": 1,
+  "size": "816x816",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-menu-celozernovy-20261109T131633476-540c.png"
+  ],
+  "usage": {
+    "input_tokens": 85,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 85
+    },
+    "output_tokens": 171,
+    "output_tokens_details": {
+      "image_tokens": 171,
+      "text_tokens": 0
+    },
+    "total_tokens": 256
+  }
+}

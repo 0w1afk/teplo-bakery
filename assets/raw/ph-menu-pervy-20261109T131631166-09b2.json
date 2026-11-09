@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:16:31.169Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of a round wheat sourdough boule on crumpled kraft paper, blistered crust with a flour-dusted cross scoring, one side catching soft daylight. 50mm lens, f/4, focus on the scoring; paper creases in soft shadow. Warm cream palette, loaf slightly off-center. No text, no watermark, no props.",
+  "n": 1,
+  "size": "816x816",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-menu-pervy-20261109T131631166-09b2.png"
+  ],
+  "usage": {
+    "input_tokens": 79,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 79
+    },
+    "output_tokens": 171,
+    "output_tokens_details": {
+      "image_tokens": 171,
+      "text_tokens": 0
+    },
+    "total_tokens": 250
+  }
+}

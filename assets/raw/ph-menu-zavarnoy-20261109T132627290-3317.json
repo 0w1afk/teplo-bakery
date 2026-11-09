@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:26:27.298Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-menu-zavarnoy-20261109T131630353-416b.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of a small dense dark rectangular rye loaf in the scalded-bread style, glossy scalded top, whole coriander seeds scattered on top, standing on crumpled kraft paper. 50mm lens, f/4, focus on the glossy crust edge. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1920x1920",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-menu-zavarnoy-20261109T131630353-416b.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-menu-zavarnoy-20261109T132627290-3317.png"
+  ],
+  "usage": {
+    "input_tokens": 2651,
+    "input_tokens_details": {
+      "image_tokens": 2532,
+      "text_tokens": 119
+    },
+    "output_tokens": 3276,
+    "output_tokens_details": {
+      "image_tokens": 3276,
+      "text_tokens": 0
+    },
+    "total_tokens": 5927
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:16:31.120Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of a dark rye sourdough boule on crumpled kraft paper, deep brown matte crust, coriander seeds pressed into the top, one flour dusting streak. 50mm lens, f/4, focus on the seeds; paper folds fall into soft shadow. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props.",
+  "n": 1,
+  "size": "816x816",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-menu-temny-20261109T131631117-026a.png"
+  ],
+  "usage": {
+    "input_tokens": 86,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 86
+    },
+    "output_tokens": 171,
+    "output_tokens_details": {
+      "image_tokens": 171,
+      "text_tokens": 0
+    },
+    "total_tokens": 257
+  }
+}

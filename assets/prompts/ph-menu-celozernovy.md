@@ -1,0 +1,2 @@
+# ph-menu-celozernovy — «Целозерновой», в зернах. 1:1.
+Macro photograph of a wheat loaf completely rolled in mixed whole grains and seeds — cracked wheat, sunflower seeds, flax — the grains crisp and separate on the crust, standing on crumpled kraft paper. 50mm lens, f/4, focus on the grain texture. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props.

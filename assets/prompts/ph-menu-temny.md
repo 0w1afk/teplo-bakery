@@ -1,0 +1,2 @@
+# ph-menu-temny — «Тёмный», ржаной с солодом и кориандром. 1:1, карточка меню.
+Macro photograph of a dark rye sourdough boule on crumpled kraft paper, deep brown matte crust, coriander seeds pressed into the top, one flour dusting streak. 50mm lens, f/4, focus on the seeds; paper folds fall into soft shadow. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props.

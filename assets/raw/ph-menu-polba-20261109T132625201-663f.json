@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:26:25.206Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-menu-polba-20261109T131632032-6dec.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of an oval pale-golden spelt loaf on crumpled kraft paper, thin glossy honey sheen on the crust, light scoring lines, soft flour dusting. 50mm lens, f/4, focus on the sheen; background paper in soft shadow. Window light from the left, warm cream palette, loaf slightly off-center. No text, no watermark, no props. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1920x1920",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-menu-polba-20261109T131632032-6dec.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-menu-polba-20261109T132625201-663f.png"
+  ],
+  "usage": {
+    "input_tokens": 2650,
+    "input_tokens_details": {
+      "image_tokens": 2532,
+      "text_tokens": 118
+    },
+    "output_tokens": 3276,
+    "output_tokens_details": {
+      "image_tokens": 3276,
+      "text_tokens": 0
+    },
+    "total_tokens": 5926
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:27:31.283Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-baker-anna-20261109T131658473-9d24.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Candid documentary photograph of a woman in her early thirties, a bakery cook, in a plain linen apron, shaping croissant dough at a flour-dusted wooden bench; she is turned three-quarters away from the camera, looking down at her hands, flour dust on her forearms. 50mm lens, f/2, focus on her hands and the dough, the face soft and partially turned. Single window light from the left, warm cream palette, natural skin texture, no make-up styling. No text, no smile at camera, no stock-photo styling, no other people. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1712x2144",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-baker-anna-20261109T131658473-9d24.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-baker-anna-20261109T132731278-8434.png"
+  ],
+  "usage": {
+    "input_tokens": 2499,
+    "input_tokens_details": {
+      "image_tokens": 2340,
+      "text_tokens": 159
+    },
+    "output_tokens": 2586,
+    "output_tokens_details": {
+      "image_tokens": 2586,
+      "text_tokens": 0
+    },
+    "total_tokens": 5085
+  }
+}

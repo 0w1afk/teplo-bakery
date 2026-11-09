@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:25:14.033Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-craft-crust-20261109T131602539-2975-v1.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Macro photograph of a wheat sourdough loaf crust filling the frame. 100mm macro lens, 1:1 magnification, f/4, focus on the blistered deep rust-brown crust with flour dusting settled into small cracks; at the lower edge a partial cut reveals porous open crumb with irregular holes. Single window light from the left, the background falls off within millimetres into a deep warm brown shadow. Slight softness at the frame edges, a stray crumb of flour in the foreground. Warm cream and brown palette. No text, no watermark, no knife, no hands. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1712x2144",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-craft-crust-20261109T131602539-2975-v1.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-craft-crust-20261109T132514026-2237.png"
+  ],
+  "usage": {
+    "input_tokens": 2500,
+    "input_tokens_details": {
+      "image_tokens": 2340,
+      "text_tokens": 160
+    },
+    "output_tokens": 2586,
+    "output_tokens_details": {
+      "image_tokens": 2586,
+      "text_tokens": 0
+    },
+    "total_tokens": 5086
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:16:57.410Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Candid documentary photograph of a man in his forties, short beard, plain dark t-shirt and linen apron, lifting a large smooth dough mass from a wooden bench with a bench scraper nearby; flour dust on his hands and apron, body turned three-quarters away, face in profile looking at the dough. 50mm lens, f/2, focus on the dough mass. Single window light from the left, warm cream palette, natural skin texture. No text, no smile at camera, no other people.",
+  "n": 1,
+  "size": "736x912",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-baker-dmitry-20261109T131657408-9ab9.png"
+  ],
+  "usage": {
+    "input_tokens": 110,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 110
+    },
+    "output_tokens": 139,
+    "output_tokens_details": {
+      "image_tokens": 139,
+      "text_tokens": 0
+    },
+    "total_tokens": 249
+  }
+}

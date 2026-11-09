@@ -1,0 +1,33 @@
+{
+  "created": "2026-11-09T13:14:47.460Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Overhead photograph of crumpled brown kraft paper filling the whole frame as a tabletop surface, soft creases and folds catching daylight. A wheat sourdough loaf with a flour-dusted crust enters the frame from the bottom right corner, about a third of the loaf visible, diagonal scoring cuts on the crust. The left half of the frame is quiet flat kraft paper with a light uneven dusting of flour. Shot from directly above with a 35mm lens at f/4; single window light from the upper left, the right side falls into soft shadow. Warm cream and brown palette, matte paper texture, fine flour specks. Main subject within the right quarter, safe for a 4:5 crop of the right side. No text, no watermark, no people, no props, no light rays.",
+  "n": 2,
+  "size": "1088x608",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-hero-paper-a-20261109T131447455-aade-v1.png",
+    "assets/raw/ph-hero-paper-a-20261109T131447455-aade-v2.png"
+  ],
+  "usage": {
+    "input_tokens": 342,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 342
+    },
+    "output_tokens": 192,
+    "output_tokens_details": {
+      "image_tokens": 192,
+      "text_tokens": 0
+    },
+    "total_tokens": 534
+  }
+}

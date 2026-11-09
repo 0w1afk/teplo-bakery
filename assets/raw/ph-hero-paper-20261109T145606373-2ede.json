@@ -1,0 +1,36 @@
+{
+  "created": "2026-11-09T14:56:06.382Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-hero-paper-quarter-20261109T145234794-4361.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Composite of two reference images. The round scored wheat sourdough boule from image 1 is pushed into the very bottom right CORNER of the frame so far that ONLY A QUARTER of the boule is visible: its center lies outside the frame beyond the corner; we see just one quarter arc of the crust with two or three petal scoring cuts, entering the frame from the corner. Three quarters of the boule lie beyond the frame edges — the boule is NOT fully visible. The visible quarter takes up about one quarter of the frame width in the corner. The boule sits on the even warm cream paper surface from image 2 — very low contrast, almost plain matte cardstock with a faint texture, no pronounced creases. A small soft contact shadow directly under the visible arc of the boule — light falls from directly above. A thin trace of flour near the boule on the paper. The left half and the top of the frame stay quiet and even, safe for text. 35mm lens, top-down, f/8. No text, no watermark, no people, no props.",
+  "n": 1,
+  "size": "2560x1440",
+  "quality": "max",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-hero-paper-quarter-20261109T145234794-4361.png",
+    "assets/raw/ph-hero-paper-b-20261109T131446186-64cc-v1.png",
+    "assets/raw/ph-hero-paper-quiet-v3-20261109T144241094-bd04.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-hero-paper-20261109T145606373-2ede.png"
+  ],
+  "usage": {
+    "input_tokens": 2194,
+    "input_tokens_details": {
+      "image_tokens": 1938,
+      "text_tokens": 256
+    },
+    "output_tokens": 7370,
+    "output_tokens_details": {
+      "image_tokens": 7370,
+      "text_tokens": 0
+    },
+    "total_tokens": 9564
+  }
+}

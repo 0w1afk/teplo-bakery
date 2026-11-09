@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:16:00.789Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Close-up photograph of a wheat dough risen in a floured banneton basket, covered with a linen cloth edge, standing on a metal shelf inside a home fridge; faint condensation on the shelf edge, cool neutral light unlike the warm bakery scenes, still clean and simple. 50mm lens, f/2.8, focus on the flour-dusted dough surface. Slightly off-center object. No text, no watermark, no fridge brand, no plastic containers.",
+  "n": 1,
+  "size": "816x816",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-process-cold-20261109T131600787-ba6c.png"
+  ],
+  "usage": {
+    "input_tokens": 100,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 100
+    },
+    "output_tokens": 171,
+    "output_tokens_details": {
+      "image_tokens": 171,
+      "text_tokens": 0
+    },
+    "total_tokens": 271
+  }
+}

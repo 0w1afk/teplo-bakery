@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:25:16.079Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-process-mix-20261109T131559729-8c49.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Close-up photograph of a working baker's hands kneading a smooth wheat dough mass on a flour-dusted wooden board, flour settled in the creases of fingers and knuckles, dough stretched between the palms. 50mm lens, f/2.8, focus on the dough surface; the board fills the lower frame, background dark and out of focus. Single window light from the left. Warm palette, natural skin texture, no manicure. No faces, no text, no watermark. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1920x1920",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-process-mix-20261109T131559729-8c49.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-process-mix-20261109T132516072-58ef.png"
+  ],
+  "usage": {
+    "input_tokens": 2670,
+    "input_tokens_details": {
+      "image_tokens": 2532,
+      "text_tokens": 138
+    },
+    "output_tokens": 3276,
+    "output_tokens_details": {
+      "image_tokens": 3276,
+      "text_tokens": 0
+    },
+    "total_tokens": 5946
+  }
+}

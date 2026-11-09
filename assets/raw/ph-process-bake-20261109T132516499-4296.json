@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T13:25:16.504Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-process-bake-20261109T131600487-4ff6.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Close-up photograph of a wheat loaf baking on a stone hearth inside a dark oven, the crust already deep rust-brown with flour dusting, faint ember glow from the back wall as the only light source, soft soot texture on the stone. 50mm lens, f/2.8, focus on the loaf edge; the oven mouth falls into darkness. Single warm ember light, everything else in shadow. No text, no flames engulfing the loaf, no people. Match the lighting, colour and lens character of the reference image.",
+  "n": 1,
+  "size": "1920x1920",
+  "quality": "high",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-process-bake-20261109T131600487-4ff6.png",
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-process-bake-20261109T132516499-4296.png"
+  ],
+  "usage": {
+    "input_tokens": 2667,
+    "input_tokens_details": {
+      "image_tokens": 2532,
+      "text_tokens": 135
+    },
+    "output_tokens": 3276,
+    "output_tokens_details": {
+      "image_tokens": 3276,
+      "text_tokens": 0
+    },
+    "total_tokens": 5943
+  }
+}

@@ -1,0 +1,3 @@
+# ph-baker-anna — Анна Соколова, портрет-карточка. 4:5.
+Где: глава 05 «Кто печёт», первая карточка. Роль: утренняя выпечка и круассаны.
+Candid documentary photograph of a woman in her early thirties, a bakery cook, in a plain linen apron, shaping croissant dough at a flour-dusted wooden bench; she is turned three-quarters away from the camera, looking down at her hands, flour dust on her forearms. 50mm lens, f/2, focus on her hands and the dough, the face soft and partially turned. Single window light from the left, warm cream palette, natural skin texture, no make-up styling. No text, no smile at camera, no stock-photo styling, no other people.

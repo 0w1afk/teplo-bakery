@@ -1,0 +1,34 @@
+{
+  "created": "2026-11-09T13:23:52.481Z",
+  "stage": "final",
+  "approved_draft": "assets/raw/ph-hero-paper-b-20261109T131446186-64cc-v1.png",
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Overhead photograph of crumpled brown kraft paper filling the frame as a tabletop. A round wheat sourdough boule seen from directly above occupies only the bottom right corner quarter of the frame: scored petal cuts, blistered flour-dusted crust; the boule is cropped by the frame edges, only its quarter visible. The remaining three quarters are flat crumpled kraft paper with a light dusting of flour. 35mm lens, top-down, f/4; single window light from the upper left, lower right corner slightly darker. Warm cream and brown palette, matte paper texture. Safe for a 4:5 crop of the right side. No text, no watermark, no people, no props, no light rays.",
+  "n": 1,
+  "size": "2560x1440",
+  "quality": "max",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-hero-paper-b-20261109T131446186-64cc-v1.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-hero-paper-20261109T132352473-d1af.png"
+  ],
+  "usage": {
+    "input_tokens": 811,
+    "input_tokens_details": {
+      "image_tokens": 646,
+      "text_tokens": 165
+    },
+    "output_tokens": 7370,
+    "output_tokens_details": {
+      "image_tokens": 7370,
+      "text_tokens": 0
+    },
+    "total_tokens": 8181
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T13:15:58.037Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Close-up photograph of a glass jar with wheat sourdough starter, airy bubbles through the pale beige culture, a rubber-band level mark on the glass, flour smears on the jar rim. 50mm lens, f/2.8, focus on the bubbles near the surface; crumpled kraft paper background falls off into soft shadow. Single window light from the left. Warm cream palette. Object slightly off-center. No text, no watermark, no hands, no kitchen clutter.",
+  "n": 1,
+  "size": "816x816",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-process-leaven-20261109T131558030-8d34.png"
+  ],
+  "usage": {
+    "input_tokens": 105,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 105
+    },
+    "output_tokens": 171,
+    "output_tokens_details": {
+      "image_tokens": 171,
+      "text_tokens": 0
+    },
+    "total_tokens": 276
+  }
+}

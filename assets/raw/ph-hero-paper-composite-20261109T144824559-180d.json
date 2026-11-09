@@ -1,0 +1,35 @@
+{
+  "created": "2026-11-09T14:48:24.563Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "edits",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Composite of the two reference images. Take the round scored wheat sourdough boule from image 1 — exactly as it is: same crust, same petal scoring, same flour dusting, same size and same position in the bottom right corner quarter of the frame. Replace everything else (the crumpled brown paper) with the even warm cream paper surface from image 2 — very low contrast, almost plain matte cardstock with a faint texture, no pronounced creases. The boule now sits on that cream paper: add a small soft contact shadow directly under and around the boule — the light falls from directly above the loaf, so the shadow is a tight dark halo hugging its edge. Keep a trace of flour dust near the boule on the paper. The left half of the frame stays quiet and even, safe for text. 35mm lens, top-down, f/8. No text, no watermark, no people, no props.",
+  "n": 1,
+  "size": "1088x608",
+  "quality": "low",
+  "output_format": "png",
+  "references": [
+    "assets/raw/ph-hero-paper-b-20261109T131446186-64cc-v1.png",
+    "assets/raw/ph-hero-paper-quiet-v3-20261109T144241094-bd04.png"
+  ],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-hero-paper-composite-20261109T144824559-180d.png"
+  ],
+  "usage": {
+    "input_tokens": 1508,
+    "input_tokens_details": {
+      "image_tokens": 1292,
+      "text_tokens": 216
+    },
+    "output_tokens": 96,
+    "output_tokens_details": {
+      "image_tokens": 96,
+      "text_tokens": 0
+    },
+    "total_tokens": 1604
+  }
+}

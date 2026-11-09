@@ -1,0 +1,32 @@
+{
+  "created": "2026-11-09T14:42:41.096Z",
+  "stage": "draft",
+  "approved_draft": null,
+  "endpoint": "generations",
+  "model": "gpt-image-2.5-sunburst",
+  "prompt": "Overhead photograph of a warm cream paper tabletop filling the whole frame. The paper has very subtle, barely visible soft creases — it reads almost like plain matte cardstock with a faint texture, very low contrast. A round wheat sourdough boule seen from directly above sits in the bottom right corner quarter of the frame: scored petal cuts, light flour dusting on its crust; a soft contact shadow falls from the boule onto the paper along its left edge, grounding it on the surface. A sparse, uneven dusting of flour is scattered on the paper near the boule — thin and light, never covering the left half of the frame. 35mm lens, top-down, f/8; single soft window light from the upper left, very low contrast. Light warm cream palette, matte finish. Safe for a 4:5 crop of the right side. No text, no watermark, no people, no props.",
+  "n": 1,
+  "size": "1088x608",
+  "quality": "low",
+  "output_format": "png",
+  "references": [],
+  "mask": null,
+  "input_fidelity": null,
+  "revised_prompt": [],
+  "files": [
+    "assets/raw/ph-hero-paper-quiet-v3-20261109T144241094-bd04.png"
+  ],
+  "usage": {
+    "input_tokens": 193,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 193
+    },
+    "output_tokens": 96,
+    "output_tokens_details": {
+      "image_tokens": 96,
+      "text_tokens": 0
+    },
+    "total_tokens": 289
+  }
+}
