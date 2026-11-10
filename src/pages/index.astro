@@ -79,6 +79,8 @@ const bakers = [
 const heroAlt =
   'Круглый пшеничный хлеб на бумаге, присыпанной мукой'
 const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 1920], format: 'webp', alt: heroAlt })
+// BASE_URL в этой версии Astro без завершающего слэша: локально «», с base — «/teplo-bakery».
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 ---
 
 <Base
@@ -116,7 +118,7 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
         <source
           media="(max-width: 767px)"
           type="image/avif"
-          srcset="/images/ph-hero-paper-mobile-450.avif 450w, /images/ph-hero-paper-mobile-768.avif 768w"
+          srcset={`${base}/images/ph-hero-paper-mobile-450.avif 450w, ${base}/images/ph-hero-paper-mobile-768.avif 768w`}
           sizes="100vw"
         />
         <img
