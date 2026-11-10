@@ -14,7 +14,7 @@ const { products } = Astro.props
     <ul class="cart-list">
       {products.map(p => (
         <li class="cart-row" data-id={p.id} data-price={p.price} hidden>
-          <Image src={p.src} alt="" width={72} height={72} loading="lazy" />
+          <Image src={p.src} alt="" width={72} height={72} loading="eager" />
           <div class="cart-item-detail">
             <div class="cart-item-line">
               <h3>{p.name}</h3><span class="dots" aria-hidden="true"></span><strong class="row-sum"></strong>
