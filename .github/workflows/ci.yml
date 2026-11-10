@@ -1,0 +1,53 @@
+name: CI
+
+# Проверки на каждый пуш и PR. Секреты и деплой сюда не попадают:
+# выкладка — отдельный workflow Deploy (workflow_dispatch), см. DEPLOY.md.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, типы, тесты, сборка
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Слаг проекта = имя репозитория. Переопределяется переменной репозитория
+      # PROJECT_SLUG (Settings → Secrets and variables → Actions → Variables),
+      # если адрес должен отличаться от имени репозитория.
+      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
+      SITE_BASE: /${{ vars.PROJECT_SLUG || github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Зависимости
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Типы (Next)
+        run: npm run typecheck --if-present
+
+      - name: Типы и разметка (Astro)
+        run: npm run check --if-present
+
+      - name: Тесты
+        run: npm test --if-present
+
+      # Сборка сразу с base проекта: ловим сломанные абсолютные пути до деплоя.
+      - name: Сборка под https://gussy-pussy.ru/${{ env.PROJECT }}/
+        run: npm run build

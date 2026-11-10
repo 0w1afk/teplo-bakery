@@ -1,0 +1,99 @@
+name: Deploy
+
+# Ручная выкладка. Запуск: Actions → Deploy → Run workflow (ветка main или тег).
+# Проверки прогоняются в этом же запуске, деплой стартует только после них.
+#
+# Почему ручной workflow, а не «кнопка после CI»: required reviewers у environment
+# доступны в приватных репозиториях только на платных тарифах GitHub. На бесплатном
+# тарифе единственный ручной гейт — workflow_dispatch. Если тариф появится,
+# достаточно добавить в environment production правило Required reviewers:
+# деплой-джоба будет ждать подтверждения, ничего в YAML менять не нужно.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Проверки перед деплоем
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
+      SITE_BASE: /${{ vars.PROJECT_SLUG || github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Зависимости
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Типы (Next)
+        run: npm run typecheck --if-present
+
+      - name: Типы и разметка (Astro)
+        run: npm run check --if-present
+
+      - name: Тесты
+        run: npm test --if-present
+
+      - name: Сборка под https://gussy-pussy.ru/${{ env.PROJECT }}/
+        run: npm run build
+
+      - name: Артефакт сборки
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Деплой на gussy-pussy.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
+    needs: verify
+    # Деплой только с main или с тега (тег — способ откатиться на старый коммит).
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: https://gussy-pussy.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
+    env:
+      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
+    steps:
+      - name: Артефакт сборки
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+
+      - name: Ключ деплоя
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      # На сервере ключ ограничен rrsync: доступна только запись в
+      # /srv/gussy-pussy.ru/sites, shell и остальные каталоги закрыты.
+      - name: Rsync в /srv/gussy-pussy.ru/sites/${{ env.PROJECT }}/
+        run: |
+          rsync -az --delete --delay-updates \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            dist/ "deploy@81.163.30.117:$PROJECT/"
