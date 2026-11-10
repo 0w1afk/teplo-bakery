@@ -55,15 +55,11 @@ html.lenis, html.lenis body { height: auto; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .milestone.is-dimmed .mini { opacity: 1; }
-  /* Статичный кадр: точка иконки скролла замирает на середине, часы на осях — статичные метки */
-  .scroll-cue-dot { animation: none; transform: translateY(14px) rotate(45deg); }
-  .bench-current, .bench-marker { display: none; }
 }
 
 /* Ссылки в тексте отличимы не только цветом (a11y link-in-text-block) */
 .site-footer a,
-.spread-text a { text-decoration: underline; text-underline-offset: 3px; }
+.spread-text a:not(.cta) { text-decoration: underline; text-underline-offset: 3px; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -125,24 +121,14 @@ html.lenis, html.lenis body { height: auto; }
   text-transform: uppercase;
 }
 .site-nav a { color: var(--muted); }
-.site-nav a:hover { color: var(--accent); }
+.site-nav a:is(:hover, :focus-visible) { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+.site-nav a:active, .logo:active { color: var(--accent-hover); }
 
-.header-cta {
-  margin-left: auto;
-  background: var(--accent);
-  color: var(--text-on-accent);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 10px 20px;
-}
-.header-cta:hover { background: var(--accent-hover); color: var(--text-on-accent); }
+.instagram-icon { flex: none; color: var(--accent); }
+.site-header > .instagram-icon { margin-left: auto; }
 
 .nav-toggle {
   display: none;
-  margin-left: auto;
   background: none;
   border: 1px solid var(--line);
   color: var(--text);
@@ -202,48 +188,31 @@ html.lenis, html.lenis body { height: auto; }
 /* ——— Иконка скролла внизу по центру обложки ——— */
 
 .scroll-cue {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 14px;
-  z-index: 1;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 44px;
+  height: 44px;
 }
 
-.scroll-cue-track {
-  display: block;
-  width: 2px;
-  height: 40px;
-  border-radius: 1px;
-  background: color-mix(in srgb, var(--muted) 40%, transparent);
-  position: relative;
-}
+.scroll-cue:is(:hover, :focus-visible) { background: var(--surface); color: var(--accent-hover); }
+.scroll-cue:active { background: var(--line); }
 
-.scroll-cue-dot {
-  position: absolute;
-  top: 3px;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  margin-left: -3.5px;
-  background: var(--accent);
-  transform: rotate(45deg);
-  animation: cue-fall 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-}
-
-@keyframes cue-fall {
-  0% { transform: translateY(0) rotate(45deg); }
-  72% { transform: translateY(28px) rotate(45deg); }
-  100% { transform: translateY(28px) rotate(45deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue svg { animation: cue-nod 1.8s ease-in-out infinite; }
+  @keyframes cue-nod { 50% { transform: translateY(4px); } }
 }
 
 .hero-bottom {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  gap: 8px;
+}
+
+.hero-details {
+  display: grid;
   gap: 6px;
-  border-top: 1px solid var(--muted);
-  padding-top: 20px;
+  align-self: flex-start;
 }
 
 .hero-sub {
@@ -282,11 +251,13 @@ html.lenis, html.lenis body { height: auto; }
   border: 1px solid var(--accent);
 }
 .cta-ghost:hover { background: var(--accent); color: var(--text-on-accent); }
+.cta:active, .nav-toggle:active { background: var(--text); color: var(--surface); }
 
 /* ——— Главы ——— */
 
 .chapter {
   padding: 96px 64px;
+  scroll-margin-top: 64px;
   border-top: 1px solid var(--line);
 }
 
@@ -323,6 +294,9 @@ h2 {
   align-items: start;
 }
 
+#craft-title { margin-top: 0; }
+#craft .spread-figure { overflow: hidden; }
+
 .spread-text p { max-width: 640px; margin-bottom: 16px; }
 .spread-text p:last-child { margin-bottom: 0; }
 
@@ -338,8 +312,8 @@ blockquote {
   max-width: 560px;
 }
 
-.spread-figure { margin: 0; position: relative; z-index: 2; margin-bottom: -112px; }
-#process { padding-top: 200px; }
+.spread-figure { margin: 0; position: relative; z-index: 2; }
+
 .spread-figure figcaption { margin-top: 12px; }
 
 figure img { width: 100%; height: auto; }
@@ -466,7 +440,6 @@ figure img { width: 100%; height: auto; }
   align-items: center;
   transition: opacity 0.3s linear;
 }
-.milestone { transition: opacity 0.3s linear; }
 /* Приглушение без потери контраста: время теряет акцентный цвет, фото блекнет; текст остаётся полноконтрастным (AA) */
 .milestone .mini { transition: opacity 0.3s linear; }
 .milestone.is-dimmed .time { color: var(--muted); }
@@ -500,14 +473,29 @@ figure img { width: 100%; height: auto; }
 
 .milestone-body p { max-width: 560px; }
 
+@media (prefers-reduced-motion: reduce) {
+  .bench-current, .bench-marker { display: none; }
+}
+
 /* ——— Меню: видимая сетка ——— */
+
+#menu { container: menu / inline-size; }
 
 .menu-strip {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  --menu-gap: 24px;
+  grid-template-columns: minmax(0, 560px);
+  gap: var(--menu-gap);
+}
+
+/* Две и три карточки по 400px с промежутками по 24px. */
+@container menu (min-width: 824px) {
+  .menu-strip { grid-template-columns: repeat(2, minmax(400px, 560px)); }
+}
+@container menu (min-width: 1248px) {
+  .menu-strip { grid-template-columns: repeat(3, minmax(400px, 560px)); }
 }
 
 .menu-card {
@@ -542,15 +530,13 @@ figure img { width: 100%; height: auto; }
 
 .menu-note {
   max-width: 640px;
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
+  margin-bottom: 24px;
   color: var(--muted);
 }
 
 .chapter .cta { margin-top: 24px; }
 
-/* ——— Кто печёт: карточки с выходом за границу ——— */
+/* ——— Кто печёт ——— */
 
 .baker-grid {
   list-style: none;
@@ -558,7 +544,6 @@ figure img { width: 100%; height: auto; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-bottom: -144px;
 }
 
 .baker-card {
@@ -581,7 +566,6 @@ figure img { width: 100%; height: auto; }
 
 /* ——— Как найти ——— */
 
-#visit { padding-top: 240px; }
 
 .visit-note {
   font-family: var(--font-display);
@@ -590,7 +574,7 @@ figure img { width: 100%; height: auto; }
 }
 
 .visit-actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
-.visit-actions + .mono-line { margin-top: 16px; }
+#visit-map { scroll-margin-top: 72px; }
 
 .map { width: 100%; height: auto; display: block; }
 
@@ -598,6 +582,7 @@ figure img { width: 100%; height: auto; }
 
 .site-footer {
   border-top: 1px solid var(--line);
+  align-items: center;
   padding: 32px 64px;
   display: flex;
   justify-content: space-between;
@@ -607,7 +592,7 @@ figure img { width: 100%; height: auto; }
 
 /* ——— Мобильная ширина ——— */
 
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .site-header { padding: 0 20px; gap: 16px; }
   .site-nav {
     display: none;
@@ -622,24 +607,28 @@ figure img { width: 100%; height: auto; }
   }
   .site-nav a { padding: 16px 20px; border-bottom: 1px solid var(--line); }
   .site-nav.open { display: flex; }
-  .header-cta { display: none; }
   .nav-toggle { display: block; }
 
   .hero { padding: 0 20px 24px; }
-  .hero-foot { top: 16px; right: 20px; }
+  .hero-foot { top: 16px; right: 20px; padding: 4px 8px; }
+  .hero-word, .hero-details, .hero-foot {
+    background: rgb(255 249 238 / 86%);
+  }
+  .hero-word { padding: .08em .11em .16em; font-size: clamp(70px, 17vw, 120px); }
+  .hero-details { padding: 10px 14px; }
+  .hero { min-height: calc(100svh - 64px); }
 
   .chapter { padding: 64px 20px; }
   .spread { grid-template-columns: 1fr; gap: 24px; }
-  .spread-figure { margin-bottom: 0; }
-  #process { padding-top: 64px; }
+
   .bench { grid-template-columns: 1fr; gap: 24px; }
   .bench-scale { display: none; }
   .milestone { grid-template-columns: 96px 1fr; gap: 16px; padding: 20px 0; }
   .mini { width: 96px; }
-  .baker-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 0; }
-  #visit { padding-top: 64px; }
-  .menu-strip { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .baker-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .menu-strip { --menu-gap: 12px; }
   .menu-card { padding: 12px; }
   .menu-desc { font-size: 13px; }
-  .site-footer { padding: 24px 20px; flex-direction: column; }
+  .site-footer { padding: 24px 20px; align-items: flex-start; flex-direction: column; }
 }

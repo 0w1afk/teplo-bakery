@@ -1,6 +1,6 @@
 /* Анимации сайта «Тепло».
    Fade-эффектов нет: текст и фото статичны при входе в кадр.
-   Остались: параллакс фото и выходы за сетку (scrub), «пульт» главы «Как мы делаем» (scrub).
+   Остались: параллакс фото и таймлайн выпечки.
    prefers-reduced-motion: GSAP-сцены не создаются, статичный кадр.
    Smooth scroll (Lenis) инициализируется в Base.astro отдельно (скилл lenis-scroll). */
 
@@ -26,16 +26,6 @@ nav?.addEventListener('click', (event) => {
   }
 })
 
-/* ——— Ссылка-заглушка маршрута ——— */
-
-const route = document.querySelector<HTMLAnchorElement>('.js-route')
-const routeHint = document.getElementById('route-hint')
-
-route?.addEventListener('click', (event) => {
-  event.preventDefault()
-  routeHint?.removeAttribute('hidden')
-})
-
 /* ——— Пульт: модель в минутах от 00:00 дня 1 ——— */
 
 const START = 21 * 60 // 21:00 день 1
@@ -43,8 +33,8 @@ const SPAN = 32 * 60 // до 05:00 день 3 — «сутки с хвостом
 const STOPS = [21 * 60, 34 * 60, 35 * 60, 53 * 60] // 21:00 / 10:00 / 11:00 / 05:00
 
 function clockParts(min: number) {
-  const day = Math.floor(min / 1440) + 1
   const total = Math.round(min / 5) * 5 // шаг 5 минут — часы «тикают», не дрожат
+  const day = Math.floor(total / 1440) + 1
   const h = Math.floor((total % 1440) / 60)
   const m = total % 60
   return {
@@ -77,14 +67,7 @@ function setBench(progress: number) {
   })
 }
 
-/* ——— Анимации ——— */
-
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-if (prefersReduced) {
-  // Статичный кадр: вехи полноконтрастны, часы на осях — статичные метки 21:00 / 05:00
-  milestones.forEach((m) => m.classList.add('is-active'))
-} else {
+gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   // 1. Параллакс фото — scrub, ±14px
   gsap.utils.toArray<HTMLElement>('.parallax').forEach((el) => {
     gsap.fromTo(
@@ -103,37 +86,17 @@ if (prefersReduced) {
     )
   })
 
-  // 2. Выход за сетку — scrub: блок доезжает из «внутри» в «навылет»
-  gsap.fromTo(
-    '.spread-figure',
-    { y: 90 },
-    {
-      y: -20,
-      ease: 'none',
-      scrollTrigger: { trigger: '#craft', start: 'top 70%', end: 'bottom 55%', scrub: true },
-    },
-  )
-  gsap.fromTo(
-    '.baker-grid',
-    { y: 90 },
-    {
-      y: -30,
-      ease: 'none',
-      scrollTrigger: { trigger: '#baker', start: 'top 75%', end: 'bottom 60%', scrub: true },
-    },
-  )
-
-  // 3. Пульт — scrub: текущее время рядом с маркером, вехи подсвечиваются
-  setBench(0)
   if (bench) {
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: bench,
       start: 'top 70%',
       end: 'bottom 45%',
-      onUpdate: (self) => setBench(self.progress),
+      onUpdate: self => setBench(self.progress),
     })
+    setBench(trigger.progress)
   }
-
-  // Пересчёт после полной загрузки изображений (скилл lenis-scroll, правило 6)
-  window.addEventListener('load', () => ScrollTrigger.refresh())
-}
+  return () => {
+    axis?.style.removeProperty('--p')
+    milestones.forEach(step => step.classList.remove('is-active', 'is-dimmed'))
+  }
+})

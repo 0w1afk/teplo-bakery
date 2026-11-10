@@ -1,5 +1,9 @@
 ---
 import { Image, getImage } from 'astro:assets'
+import QuantityStepper from '../components/QuantityStepper.astro'
+import CartDialog from '../components/CartDialog.astro'
+import '../styles/cart.css'
+import InstagramIcon from '../components/InstagramIcon.astro'
 import Base from '../layouts/Base.astro'
 import heroDesktop from '../assets/ph-hero-paper.webp'
 import craftCrust from '../assets/ph-craft-crust.webp'
@@ -24,6 +28,7 @@ const milestones = [
   {
     id: 'ph-process-leaven',
     src: processLeaven,
+    day: 1,
     time: '21:00',
     title: 'Закваска',
     text: 'Добавляем в закваску муку и воду. Оставляем до утра.',
@@ -31,6 +36,7 @@ const milestones = [
   {
     id: 'ph-process-mix',
     src: processMix,
+    day: 2,
     time: '10:00',
     title: 'Замес',
     text: 'Замешиваем тесто вручную, пока оно не станет гладким.',
@@ -38,6 +44,7 @@ const milestones = [
   {
     id: 'ph-process-cold',
     src: processCold,
+    day: 2,
     time: '11:00',
     title: 'Расстойка',
     text: 'Ставим тесто в холодильник на 18 часов при +4 °C.',
@@ -45,6 +52,7 @@ const milestones = [
   {
     id: 'ph-process-bake',
     src: processBake,
+    day: 3,
     time: '05:00',
     title: 'Выпечка',
     text: 'Выпекаем хлеб на каменном поду при 250 °C. К открытию первая партия готова.',
@@ -52,14 +60,14 @@ const milestones = [
 ]
 
 const menu = [
-  { id: 'ph-menu-temny', src: menuTemny, name: '«Тёмный»', desc: 'Ржаной хлеб с солодом и кориандром', price: '520 ₽', alt: 'Тёмный ржаной хлеб с кориандром на крафт-бумаге' },
-  { id: 'ph-menu-pervy', src: menuPervy, name: '«Хлеб»', desc: 'Пшеничный хлеб на закваске', price: '480 ₽', alt: 'Пшеничный хлеб на закваске с крестообразным надрезом' },
-  { id: 'ph-menu-polba', src: menuPolba, name: '«Полба»', desc: 'Хлеб из полбы с мёдом', price: '560 ₽', alt: 'Овальная буханка из полбы' },
-  { id: 'ph-menu-celozernovy', src: menuCelozernovy, name: '«Цельнозерновой»', desc: 'Из свежемолотой пшеницы', price: '540 ₽', alt: 'Цельнозерновой хлеб с зёрнами и семенами на корке' },
-  { id: 'ph-menu-zavarnoy', src: menuZavarnoy, name: '«Заварной»', desc: 'Бородинский хлеб с тмином', price: '500 ₽', alt: 'Буханка заварного хлеба с тёмной коркой' },
-  { id: 'ph-menu-baget', src: menuBaget, name: 'Багет «Наутро»', desc: 'В продаже до 9:00. Может закончиться раньше.', price: '220 ₽', alt: 'Багет с диагональными надрезами на крафт-бумаге' },
-  { id: 'ph-menu-croissant', src: menuCroissant, name: 'Круассан', desc: 'На сливочном масле жирностью 82,5 %', price: '280 ₽', alt: 'Круассан с тонкими слоями теста' },
-  { id: 'ph-menu-pletyonka', src: menuPletyonka, name: '«Плетёнка»', desc: 'С корицей и тростниковым сахаром', price: '320 ₽', alt: 'Плетёнка-узел с корицей и сахаром' },
+  { id: 'ph-menu-temny', src: menuTemny, name: '«Тёмный»', desc: 'Ржаной хлеб с солодом и кориандром', price: 520, alt: 'Тёмный ржаной хлеб с кориандром на крафт-бумаге' },
+  { id: 'ph-menu-pervy', src: menuPervy, name: '«Хлеб»', desc: 'Пшеничный хлеб на закваске', price: 480, alt: 'Пшеничный хлеб на закваске с крестообразным надрезом' },
+  { id: 'ph-menu-polba', src: menuPolba, name: '«Полба»', desc: 'Хлеб из полбы с мёдом', price: 560, alt: 'Овальная буханка из полбы' },
+  { id: 'ph-menu-celozernovy', src: menuCelozernovy, name: '«Цельнозерновой»', desc: 'Из свежемолотой пшеницы', price: 540, alt: 'Цельнозерновой хлеб с зёрнами и семенами на корке' },
+  { id: 'ph-menu-zavarnoy', src: menuZavarnoy, name: '«Заварной»', desc: 'Бородинский хлеб с тмином', price: 500, alt: 'Буханка заварного хлеба с тёмной коркой' },
+  { id: 'ph-menu-baget', src: menuBaget, name: 'Багет «Наутро»', desc: 'За багетом лучше прийти до 9:00.', price: 220, alt: 'Багет с диагональными надрезами на крафт-бумаге' },
+  { id: 'ph-menu-croissant', src: menuCroissant, name: 'Круассан', desc: 'На сливочном масле жирностью 82,5 %', price: 280, alt: 'Круассан с тонкими слоями теста' },
+  { id: 'ph-menu-pletyonka', src: menuPletyonka, name: '«Плетёнка»', desc: 'С корицей и тростниковым сахаром', price: 320, alt: 'Плетёнка-узел с корицей и сахаром' },
 ]
 
 const bakers = [
@@ -85,13 +93,19 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       Тепло
     </a>
     <nav class="site-nav" id="siteNav" aria-label="Разделы">
+      <a href="#menu">Выпечка</a>
       <a href="#craft">О хлебе</a>
       <a href="#process">Как печём</a>
-      <a href="#menu">Выпечка</a>
       <a href="#baker">Кто печёт</a>
       <a href="#visit">Как найти</a>
     </nav>
-    <a class="header-cta" href="#visit">Адрес и часы</a>
+    <InstagramIcon />
+    <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Корзина, 0 шт." aria-haspopup="dialog" aria-controls="cart-dialog">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m3 9 2.3 11h13.4L21 9H3Zm4 0 4-6m6 6-4-6M9 12.5l.5 4M15 12.5l-.5 4"/>
+      </svg>
+      <span id="cart-count">0</span>
+    </button>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">Меню</button>
   </header>
 
@@ -119,27 +133,62 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       <p class="hero-foot mono-line">Москва · с 2021 года</p>
       <div class="hero-inner">
         <h1 class="hero-word">Тепло</h1>
-        <a class="scroll-cue" href="#craft" aria-label="О нашем хлебе">
-          <span class="scroll-cue-track" aria-hidden="true"><span class="scroll-cue-dot"></span></span>
-        </a>
       </div>
       <div class="hero-bottom">
-        <p class="hero-sub">Домашняя пекарня.</p>
-        <p class="mono-line">Ржанская набережная, 4 · ежедневно с 8:00 до 20:00</p>
+        <div class="hero-details">
+          <p class="hero-sub">Домашняя пекарня.</p>
+          <p class="mono-line">Ржанская набережная, 4 · ежедневно с 8:00 до 20:00</p>
+        </div>
+        <a class="scroll-cue" href="#menu" aria-label="Перейти к разделу «Хлеб и выпечка»">
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+            <path d="m2 2 8 8 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
       </div>
     </section>
 
-    <!-- Глава 2. Мука, вода, соль -->
+    <section class="chapter" id="menu" data-section="menu" aria-labelledby="menu-title">
+      <h2 id="menu-title">Хлеб и выпечка</h2>
+
+      <p class="menu-note">Хлеб выкладываем к открытию, в 8:00.<br />Круассаны и плетёнки готовы к 8:30.</p>
+
+      <ul class="menu-strip">
+        {menu.map((item) => (
+          <li class="menu-card">
+            <Image
+              class="photo square"
+              id={item.id}
+              src={item.src}
+              alt={item.alt}
+              width={480}
+              height={480}
+              loading="lazy"
+            />
+            <h3>{item.name}</h3>
+            <p class="menu-desc">{item.desc}</p>
+            <p class="menu-line"><span class="dots"></span><span class="price">{item.price} ₽</span></p>
+            <form class="cart-add" data-product={item.id}>
+              <QuantityStepper name={item.name} />
+              <button type="submit" class="cart-add-button">В корзину</button>
+            </form>
+          </li>
+        ))}
+      </ul>
+
+      <a class="cta" href="#visit">Где нас найти</a>
+    </section>
+
     <section class="chapter" id="craft" data-section="craft" aria-labelledby="craft-title">
-      <h2 id="craft-title">Пшеничный хлеб на закваске</h2>
       <div class="spread">
         <div class="spread-text">
-          <p>Наш пшеничный так и называется — «Хлеб». В нём только мука, вода и соль.
-            У него хрустящая корка и чуть кисловатый мякиш.</p>
+          <h2 id="craft-title">Пшеничный хлеб на закваске</h2>
+          <p>Наш пшеничный так и называется — «Хлеб». В нём только мука, вода и соль. Закваску подкармливаем с вечера, а утром замешиваем на ней тесто вручную.</p>
+          <p>Тесто подходит в холодильнике 18 часов. За это время у хлеба появляется лёгкая кислинка. Перед выпечкой надрезаем буханку крест-накрест и кладём на горячий камень в печи. Надрез раскрывается, корка подрумянивается, а внутри остаётся мягкий пористый мякиш.</p>
+          <p>Свежий ломоть хорош со сливочным маслом. Если хлеб остался на завтра, поджарьте его на сухой сковороде, чтобы края снова хрустели.</p>
         </div>
         <figure class="spread-figure">
           <Image
-            class="photo ratio-45 parallax"
+            class="photo ratio-45"
             id="ph-craft-crust"
             src={craftCrust}
             alt="Корка и пористый мякиш пшеничного хлеба"
@@ -153,9 +202,8 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       </div>
     </section>
 
-    <!-- Глава 3. Расписание одной буханки -->
     <section class="chapter" id="process" data-section="process" aria-labelledby="process-title">
-      <h2 id="process-title">Как мы печём хлеб</h2>
+      <h2 id="process-title">Как печём</h2>
       <p class="chapter-intro">Вечером кормим закваску. Через 32 часа ставим хлеб в печь.</p>
 
       <div class="bench">
@@ -185,7 +233,7 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
                 loading="lazy"
               />
               <div class="milestone-body">
-                <p class="time">{m.time}</p>
+                <p class="time"><time datetime={m.time}>{m.time}</time> <span class="day">День {m.day}</span></p>
                 <h3>{m.title}</h3>
                 <p>{m.text}</p>
               </div>
@@ -195,34 +243,6 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       </div>
     </section>
 
-    <!-- Глава 4. Сегодня в печи -->
-    <section class="chapter" id="menu" data-section="menu" aria-labelledby="menu-title">
-      <h2 id="menu-title">Хлеб и выпечка</h2>
-
-      <ul class="menu-strip">
-        {menu.map((item) => (
-          <li class="menu-card">
-            <Image
-              class="photo square"
-              id={item.id}
-              src={item.src}
-              alt={item.alt}
-              width={480}
-              height={480}
-              loading="lazy"
-            />
-            <h3>{item.name}</h3>
-            <p class="menu-desc">{item.desc}</p>
-            <p class="menu-line"><span class="dots"></span><span class="price">{item.price}</span></p>
-          </li>
-        ))}
-      </ul>
-
-      <p class="menu-note">Хлеб выкладываем к открытию, в 8:00. Круассаны и плетёнки готовы к 8:30.</p>
-      <a class="cta" href="#visit">Где нас найти</a>
-    </section>
-
-    <!-- Глава 5. Кто печёт -->
     <section class="chapter" id="baker" data-section="baker" aria-labelledby="baker-title">
       <h2 id="baker-title">Кто печёт</h2>
       <ul class="baker-grid">
@@ -244,7 +264,6 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
       </ul>
     </section>
 
-    <!-- Глава 6. Как найти -->
     <section class="chapter" id="visit" data-section="visit" aria-labelledby="visit-title">
       <h2 id="visit-title">Как найти</h2>
       <div class="spread">
@@ -252,13 +271,11 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
           <p>Москва, Ржанская набережная, 4.</p>
           <p>Открыто каждый день с 8:00 до 20:00.</p>
           <div class="visit-actions">
-            <a class="cta js-route" href="#visit" aria-describedby="visit-map-note">Открыть маршрут</a>
+            <a class="cta" href="#visit-map" aria-describedby="visit-map-note">Показать на схеме</a>
             <a class="cta cta-ghost" href="tel:+74950000000">Позвонить</a>
           </div>
-          <p class="mono-line route-hint" id="route-hint" hidden>У этого адреса нет маршрута на карте.</p>
-          <p class="mono-line" id="visit-map-note">Сайт сделан для портфолио. Адрес и телефон вымышлены.</p>
         </div>
-        <figure class="spread-figure">
+        <figure class="spread-figure" id="visit-map" tabindex="-1">
           <svg class="map" id="ph-map" viewBox="0 0 800 450" role="img" aria-label="Пекарня на схеме Ржанской набережной">
             <rect width="800" height="450" fill="#F6EFE3"></rect>
             <path d="M0 362 C 210 330 430 332 820 384 L 820 450 L 0 450 Z" fill="#BFC9C2"></path>
@@ -287,8 +304,12 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
     </section>
   </main>
 
+  <CartDialog products={menu} />
+
   <footer class="site-footer">
     <p class="mono-line">Домашняя пекарня «Тепло»</p>
+    <p class="mono-line" id="visit-map-note">Сайт сделан для портфолио. Адрес и телефон вымышлены.</p>
+    <InstagramIcon />
   </footer>
 
   <script>

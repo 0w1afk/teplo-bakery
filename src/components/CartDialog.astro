@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets'
+import QuantityStepper from './QuantityStepper.astro'
+interface Props { products: { id: string; name: string; price: number; src: ImageMetadata }[] }
+const { products } = Astro.props
+---
+<dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title" data-lenis-prevent>
+  <header class="cart-heading">
+    <h2 id="cart-title">Корзина</h2>
+    <button class="cart-close" type="button" aria-label="Закрыть корзину" autofocus>×</button>
+  </header>
+  <p id="cart-empty">В корзине пока пусто.</p>
+  <form method="dialog" id="cart-order" hidden>
+    <ul class="cart-list">
+      {products.map(p => (
+        <li class="cart-row" data-id={p.id} data-price={p.price} hidden>
+          <Image src={p.src} alt="" width={72} height={72} loading="lazy" />
+          <div class="cart-item-detail">
+            <div class="cart-item-line">
+              <h3>{p.name}</h3><span class="dots" aria-hidden="true"></span><strong class="row-sum"></strong>
+            </div>
+            <span class="cart-unit-price">{p.price} ₽ / шт.</span>
+          </div>
+          <button type="button" class="cart-remove" aria-label={`Удалить: ${p.name}`}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+          <QuantityStepper name={p.name} inCart />
+        </li>
+      ))}
+    </ul>
+    <button type="button" class="cart-clear">Очистить корзину</button>
+    <p class="cart-total">Итого <strong id="cart-total">0 ₽</strong></p>
+    <label class="cart-phone">Телефон
+      <input type="tel" id="cart-phone" inputmode="tel" autocomplete="tel" placeholder="+7 (XXX) XXX-XX-XX" required aria-describedby="cart-demo" />
+    </label>
+    <p id="cart-demo">Демоверсия. Телефон и заказ останутся в браузере.</p>
+    <p class="cart-pickup">Заказ можно забрать в пекарне через 30 минут после оформления.</p>
+    <button type="submit" class="cart-submit">Заказать</button>
+    <p class="cart-result" role="status"></p>
+  </form>
+</dialog>
+<script>
+  import '../scripts/cart'
+</script>
