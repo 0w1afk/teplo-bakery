@@ -1,5 +1,5 @@
 ---
-project: flour-bakery
+project: teplo-bakery
 status: revised
 brief_approved: 2026-11-09
 ---

@@ -1,6 +1,6 @@
 **Перед любой работой прочитай общие правила среды: `/Users/olegsmirnov/Projects/site-fabric/AGENTS.md`.** Инструменты, бюджеты, деплой — `/Users/olegsmirnov/Projects/site-fabric/TOOLS.md`. Скиллы подключены из `/Users/olegsmirnov/Projects/site-fabric/.claude/skills`.
 
-# flour-bakery
+# teplo-bakery
 
 - **Этапы:** 1 стиль → 2 тексты → 3 дизайн-проект → 4 прототип (заглушки, без анимаций) → 5 анимации → 6 дизайн и изображения → 7 реализация на стеке. Правила и гейты — `/Users/olegsmirnov/Projects/site-fabric/AGENTS.md`.
 - **Этапы 1–2, стиль и тексты:** `brief/BRIEF.md` и `brief/TEXTS.md` (скилл `brief`) — до `status: approved` дальше не идём.

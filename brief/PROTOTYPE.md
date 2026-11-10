@@ -1,5 +1,5 @@
 ---
-project: flour-bakery
+project: teplo-bakery
 status: approved        # этап 4: статика с заглушками → approved
 status_animations: approved   # этап 5: анимации → approved
 status_design: approved       # этап 6: дизайн и изображения → approved (утверждение дизайна)
