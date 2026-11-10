@@ -8,7 +8,7 @@ interface Props {
   lang?: string
 }
 const { title, description, lang = 'ru' } = Astro.props
-const fontsHref = typeof fontsCss === 'string' ? fontsCss : fontsCss.url
+const fontsHref = fontsCss
 ---
 
 <!doctype html>

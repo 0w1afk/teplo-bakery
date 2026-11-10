@@ -121,7 +121,7 @@ const heroDesktopImg = await getImage({ src: heroDesktop, widths: [960, 1440, 19
         />
         <img
           src={heroDesktopImg.src}
-          srcset={heroDesktopImg.srcset}
+          srcset={heroDesktopImg.srcSet.attribute}
           sizes="100vw"
           alt={heroAlt}
           width={1920}

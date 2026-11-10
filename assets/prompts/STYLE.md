@@ -1,4 +1,4 @@
-# Style bible — Мука
+# Style bible — Тепло (исторически «Мука»)
 
 Medium: цифровая фотография, Sony A7R V, full-frame CMOS
 Camera & lens: 100mm macro 1:1, f/4 — крупняки и мини-карточки; 50mm f/2 — карточки меню и портреты пекарей; 35mm top-down — фон обложки

@@ -6,7 +6,7 @@ const fs = require('node:fs')
 
 const FORM = process.env.FORM === 'desktop' ? 'desktop' : 'mobile'
 const defaults = {
-  mobile: { performance: 0.8, accessibility: 0.95, 'best-practices': 0.95, seo: 0.95, lcpMs: 2500, cls: 0.1, tbtMs: 300, scriptKb: 200 },
+  mobile: { performance: 0.9, accessibility: 0.95, 'best-practices': 0.95, seo: 0.95, lcpMs: 2500, cls: 0.1, tbtMs: 300, scriptKb: 200 },
   desktop: { performance: 0.9, accessibility: 0.95, 'best-practices': 0.95, seo: 0.95, lcpMs: 1500, cls: 0.1, tbtMs: 150, scriptKb: 200 },
 }
 const file = 'metrics/budgets.json'

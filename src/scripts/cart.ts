@@ -126,9 +126,9 @@ function bindStepper(container: HTMLElement, onChange: (qty: number) => void, fa
   }
 }
 
-let opener = cartButton
+let returnFocus = cartButton
 function openCart(button: HTMLButtonElement) {
-  opener = button
+  returnFocus = button
   result.textContent = ''
   dialog.showModal()
 }
@@ -152,7 +152,7 @@ for (const card of cards) {
 
 cartButton.addEventListener('click', () => openCart(cartButton))
 closeButton.addEventListener('click', () => dialog.close())
-dialog.addEventListener('close', () => opener.focus({ preventScroll: true }))
+dialog.addEventListener('close', () => returnFocus.focus({ preventScroll: true }))
 order.querySelector('.cart-clear')!.addEventListener('click', () => {
   amounts.clear()
   save()
