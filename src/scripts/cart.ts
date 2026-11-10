@@ -1,7 +1,8 @@
 const dialog = document.querySelector<HTMLDialogElement>('#cart-dialog')!
 const order = dialog.querySelector<HTMLFormElement>('#cart-order')!
 const phone = order.querySelector<HTMLInputElement>('#cart-phone')!
-const result = order.querySelector<HTMLElement>('.cart-result')!
+const phoneError = order.querySelector<HTMLElement>('#cart-phone-error')!
+const thanks = document.querySelector<HTMLDialogElement>('#thanks-dialog')!
 const cartButton = document.querySelector<HTMLButtonElement>('#cart-trigger')!
 const badge = cartButton.querySelector<HTMLElement>('#cart-count')!
 const empty = dialog.querySelector<HTMLElement>('#cart-empty')!
@@ -40,6 +41,7 @@ function render() {
     input.min = qty === undefined ? '1' : '0'
     const label = qty === undefined ? 'В корзину' : 'В корзине'
     if (add.textContent !== label) add.textContent = label
+    add.toggleAttribute('data-in-cart', qty !== undefined)
     if (qty === undefined) {
       add.removeAttribute('aria-haspopup')
       add.removeAttribute('aria-controls')
@@ -72,8 +74,10 @@ function render() {
   totalLabel.textContent = currency.format(total)
   order.hidden = !count
   empty.hidden = !!count
-  result.textContent = ''
-  if (!count) phone.value = ''
+  if (!count) {
+    phone.value = ''
+    clearPhoneError()
+  }
 }
 
 function save() {
@@ -129,8 +133,23 @@ function bindStepper(container: HTMLElement, onChange: (qty: number) => void, fa
 let returnFocus = cartButton
 function openCart(button: HTMLButtonElement) {
   returnFocus = button
-  result.textContent = ''
   dialog.showModal()
+}
+
+function showPhoneError(message: string) {
+  phoneError.textContent = message
+  phoneError.hidden = false
+  phone.setAttribute('aria-invalid', 'true')
+  phone.setAttribute('aria-describedby', 'cart-demo cart-phone-error')
+  phone.focus()
+}
+
+function clearPhoneError() {
+  if (phoneError.hidden) return
+  phoneError.hidden = true
+  phoneError.textContent = ''
+  phone.removeAttribute('aria-invalid')
+  phone.setAttribute('aria-describedby', 'cart-demo')
 }
 
 for (const card of cards) {
@@ -152,7 +171,29 @@ for (const card of cards) {
 
 cartButton.addEventListener('click', () => openCart(cartButton))
 closeButton.addEventListener('click', () => dialog.close())
-dialog.addEventListener('close', () => returnFocus.focus({ preventScroll: true }))
+let closingForThanks = false
+dialog.addEventListener('close', () => {
+  if (closingForThanks) {
+    closingForThanks = false
+    return
+  }
+  returnFocus.focus({ preventScroll: true })
+})
+thanks.addEventListener('close', () => returnFocus.focus({ preventScroll: true }))
+thanks.querySelector('.cart-close')!.addEventListener('click', () => thanks.close())
+thanks.querySelector('[data-thanks-close]')!.addEventListener('click', () => thanks.close())
+
+function closeOnBackdrop(target: HTMLDialogElement) {
+  target.addEventListener('click', event => {
+    if (event.target !== target) return
+    const box = target.getBoundingClientRect()
+    const inside = event.clientX >= box.left && event.clientX <= box.right
+      && event.clientY >= box.top && event.clientY <= box.bottom
+    if (!inside) target.close()
+  })
+}
+closeOnBackdrop(dialog)
+closeOnBackdrop(thanks)
 order.querySelector('.cart-clear')!.addEventListener('click', () => {
   amounts.clear()
   save()
@@ -188,8 +229,7 @@ phone.addEventListener('paste', event => {
   if (!/^(?:[78])?\d{10}$/.test(pasted.replace(/\D/g, ''))) return
   event.preventDefault()
   phone.value = formatPhone(pasted)
-  phone.setCustomValidity('')
-  result.textContent = ''
+  clearPhoneError()
 })
 
 phone.addEventListener('input', () => {
@@ -201,8 +241,7 @@ phone.addEventListener('input', () => {
   let left = digitsToRight
   while (pos && left) if (/\d/.test(phone.value[--pos]!)) left--
   phone.setSelectionRange(pos, pos)
-  phone.setCustomValidity('')
-  result.textContent = ''
+  clearPhoneError()
 })
 // Skip punctuation when deleting within a formatted number.
 phone.addEventListener('beforeinput', event => {
@@ -223,9 +262,13 @@ order.addEventListener('submit', event => {
   event.preventDefault()
   phone.value = formatPhone(phone.value)
   if (!/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone.value)) {
-    phone.setCustomValidity('Введите все 10 цифр номера после +7.')
-    phone.reportValidity()
+    showPhoneError('Введите все 10 цифр номера после +7.')
     return
   }
-  result.textContent = 'Заказ проверен. Это демоверсия, заказ не отправлен.'
+  clearPhoneError()
+  amounts.clear()
+  save()
+  closingForThanks = true
+  dialog.close()
+  thanks.showModal()
 })

@@ -10,6 +10,7 @@
   --accent-hover: #8f350b;
   --line: #d9ccb4;
   --text-on-accent: #fff9ee;
+  --error: #a12a12;
 
   /* Шрифты: Literata Variable (display), Golos Text Variable (текст), JetBrains Mono Variable (служебная) */
   --font-display: 'Literata Variable', Georgia, serif;
@@ -124,8 +125,10 @@ html.lenis, html.lenis body { height: auto; }
 .site-nav a:is(:hover, :focus-visible) { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
 .site-nav a:active, .logo:active { color: var(--accent-hover); }
 
-.instagram-icon { flex: none; color: var(--accent); }
-.site-header > .instagram-icon { margin-left: auto; }
+.instagram-link { display: inline-flex; color: var(--accent); }
+.instagram-icon { display: block; flex: none; }
+.instagram-link:is(:hover, :focus-visible) { color: var(--accent-hover); }
+.site-header > .instagram-link { margin-left: auto; }
 
 .nav-toggle {
   display: none;

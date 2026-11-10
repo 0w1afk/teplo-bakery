@@ -6,8 +6,8 @@ interface Props {
 const { name, inCart = false } = Astro.props
 ---
 <div class="cart-stepper">
-  <button type="button" data-step="-1" aria-label={`Уменьшить количество: ${name}`}>−</button>
+  <button type="button" data-step="-1" title={`Уменьшить количество: ${name}`} aria-label={`Уменьшить количество: ${name}`}>−</button>
   <input type="number" min={inCart ? 0 : 1} max="999" value="1" inputmode="numeric" required disabled={inCart}
     aria-label={`${inCart ? 'В корзине' : 'Количество'}: ${name}`} />
-  <button type="button" data-step="1" aria-label={`Увеличить количество: ${name}`}>+</button>
+  <button type="button" data-step="1" title={`Увеличить количество: ${name}`} aria-label={`Увеличить количество: ${name}`}>+</button>
 </div>

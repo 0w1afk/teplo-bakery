@@ -7,10 +7,10 @@ const { products } = Astro.props
 <dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title" data-lenis-prevent>
   <header class="cart-heading">
     <h2 id="cart-title">Корзина</h2>
-    <button class="cart-close" type="button" aria-label="Закрыть корзину" autofocus>×</button>
+    <button class="cart-close" type="button" title="Закрыть" aria-label="Закрыть корзину" autofocus>×</button>
   </header>
   <p id="cart-empty">В корзине пока пусто.</p>
-  <form method="dialog" id="cart-order" hidden>
+  <form method="dialog" id="cart-order" novalidate hidden>
     <ul class="cart-list">
       {products.map(p => (
         <li class="cart-row" data-id={p.id} data-price={p.price} hidden>
@@ -21,7 +21,7 @@ const { products } = Astro.props
             </div>
             <span class="cart-unit-price">{p.price} ₽ / шт.</span>
           </div>
-          <button type="button" class="cart-remove" aria-label={`Удалить: ${p.name}`}>
+          <button type="button" class="cart-remove" title={`Удалить: ${p.name}`} aria-label={`Удалить: ${p.name}`}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.6" />
             </svg>
@@ -34,12 +34,22 @@ const { products } = Astro.props
     <p class="cart-total">Итого <strong id="cart-total">0 ₽</strong></p>
     <label class="cart-phone">Телефон
       <input type="tel" id="cart-phone" inputmode="tel" autocomplete="tel" placeholder="+7 (XXX) XXX-XX-XX" required aria-describedby="cart-demo" />
+      <span class="cart-field-error" id="cart-phone-error" role="alert" hidden></span>
     </label>
     <p id="cart-demo">Демоверсия. Телефон и заказ никуда не отправляются.</p>
-    <p class="cart-pickup">В настоящей пекарне заказ можно забрать через 30 минут.</p>
+    <p class="cart-notice">Заказ можно забрать в пекарне через 30 минут после оформления.</p>
     <button type="submit" class="cart-submit">Заказать</button>
-    <p class="cart-result" role="status"></p>
   </form>
+</dialog>
+
+<dialog id="thanks-dialog" class="cart-dialog thanks-dialog" aria-labelledby="thanks-title" data-lenis-prevent>
+  <header class="cart-heading">
+    <h2 id="thanks-title">Спасибо за заказ</h2>
+    <button class="cart-close" type="button" title="Закрыть" aria-label="Закрыть" autofocus>×</button>
+  </header>
+  <p class="thanks-text">Заказ можно забрать в пекарне через 30 минут после оформления.</p>
+  <p class="thanks-demo">Демоверсия. Телефон и заказ никуда не отправлялись.</p>
+  <button type="button" class="cart-submit" data-thanks-close>Хорошо</button>
 </dialog>
 <script>
   import '../scripts/cart'
