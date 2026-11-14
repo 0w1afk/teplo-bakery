@@ -1,4 +1,4 @@
-**Перед любой работой прочитай общие правила среды: `/Users/olegsmirnov/Projects/site-fabric/AGENTS.md`.** Инструменты, бюджеты, деплой — `/Users/olegsmirnov/Projects/site-fabric/TOOLS.md`. Скиллы подключены из `/Users/olegsmirnov/Projects/site-fabric/.claude/skills`.
+**Перед любой работой прочитай общие правила среды: `/Users/olegsmirnov/Projects/site-fabric/AGENTS.md`.** Инструменты и бюджеты — `/Users/olegsmirnov/Projects/site-fabric/TOOLS.md`, деплой — `/Users/olegsmirnov/Projects/site-fabric/DEPLOY.md`. Скиллы подключены из `/Users/olegsmirnov/Projects/site-fabric/.agents/skills`.
 
 # teplo-bakery
 
@@ -31,7 +31,7 @@
 | `npm run preview` | prod-сервер (http://localhost:4321) |
 | `npm run metrics` | build → Lighthouse (mobile + desktop) → плавность скролла (скилл `metrics`) |
 | `node /Users/olegsmirnov/Projects/site-fabric/bin/3d.mjs all` | 3D: `3d/work/*.blend` → `public/models/` (скилл `blender-export`) |
-| `node /Users/olegsmirnov/Projects/site-fabric/bin/new-site.mjs --link` | после клонирования: восстановить ссылку `.claude/skills` |
+| `node /Users/olegsmirnov/Projects/site-fabric/bin/new-site.mjs --link` | после клонирования: восстановить ссылку `.agents/skills` |
 
 ## Соглашения
 

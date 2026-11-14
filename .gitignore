@@ -13,7 +13,7 @@ next-env.d.ts
 !.env.example
 
 # Environment link to site-fabric (recreated by `node <fabric>/bin/new-site.mjs --link`)
-.claude/skills
+.agents/skills
 
 # 3D working files
 3d/work/

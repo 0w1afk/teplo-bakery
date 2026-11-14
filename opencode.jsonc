@@ -2,8 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   // Сгенерировано из site-fabric@f9c988c. Общие правила и скиллы — по ссылке на среду.
   "instructions": ["/Users/olegsmirnov/Projects/site-fabric/AGENTS.md"],
-  "skills": ["/Users/olegsmirnov/Projects/site-fabric/.claude/skills"],
-  // Скиллы лежат в .claude/skills/ (OpenCode читает эту папку для совместимости).
+  "skills": ["/Users/olegsmirnov/Projects/site-fabric/.agents/skills"],
+  // Скиллы — переносимые SKILL.md в .agents/skills/ (стандарт Agent Skills).
   // Правила проекта: AGENTS.md. Список и обоснование инструментов: TOOLS.md.
   // Версии локальных серверов закреплены; обновлять осознанно (TOOLS.md, раздел B).
   "mcp": {
