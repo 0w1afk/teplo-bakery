@@ -49,5 +49,5 @@ jobs:
         run: npm test --if-present
 
       # Сборка сразу с base проекта: ловим сломанные абсолютные пути до деплоя.
-      - name: Сборка под https://gussy-pussy.ru/${{ env.PROJECT }}/
+      - name: Сборка под https://landingmania.ru/${{ env.PROJECT }}/
         run: npm run build

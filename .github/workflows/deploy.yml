@@ -49,7 +49,7 @@ jobs:
       - name: Тесты
         run: npm test --if-present
 
-      - name: Сборка под https://gussy-pussy.ru/${{ env.PROJECT }}/
+      - name: Сборка под https://landingmania.ru/${{ env.PROJECT }}/
         run: npm run build
 
       - name: Артефакт сборки
@@ -61,7 +61,7 @@ jobs:
           retention-days: 7
 
   deploy:
-    name: Деплой на gussy-pussy.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
+    name: Деплой на landingmania.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
     needs: verify
     # Деплой только с main или с тега (тег — способ откатиться на старый коммит).
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
@@ -69,7 +69,7 @@ jobs:
     timeout-minutes: 10
     environment:
       name: production
-      url: https://gussy-pussy.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
+      url: https://landingmania.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
     env:
       PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
     steps:
@@ -91,8 +91,8 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       # На сервере ключ ограничен rrsync: доступна только запись в
-      # /srv/gussy-pussy.ru/sites, shell и остальные каталоги закрыты.
-      - name: Rsync в /srv/gussy-pussy.ru/sites/${{ env.PROJECT }}/
+      # /srv/landingmania.ru/sites, shell и остальные каталоги закрыты.
+      - name: Rsync в /srv/landingmania.ru/sites/${{ env.PROJECT }}/
         run: |
           rsync -az --delete --delay-updates \
             -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
