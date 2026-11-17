@@ -42,6 +42,7 @@
 ## Специфика проекта
 
 - **Адрес:** https://teplo.zimorodok-dev.ru/ — тестовый поддомен. Сборка закрыта от индексации: `robots.txt` с `Disallow: /`, `noindex, nofollow` в разметке (`SITE_INDEXABLE=false` по умолчанию) и `X-Robots-Tag` в nginx. Деплой — GitHub Actions → Deploy (rsync в `/srv/zimorodok-dev.ru/teplo/`), см. `site-fabric/DEPLOY.md`.
+- **Метрики:** `https://teplo.zimorodok-dev.ru/lighthouse/` — мобильный и десктопный прогоны Lighthouse, обновляются в джобе деплоя (`scripts/lighthouse-page.mjs`).
 - **Бренд:** «Тепло» (на этапах 1–6 — «Мука»); идентификатор проекта — `teplo-bakery`.
 - **Документы:** `BRIEF.md`, `DESIGN.md`, `PROTOTYPE.md` — исторические записи этапов 1–6; актуальные отличия от них — `DECISIONS.md`. Тексты сайта — `TEXTS.md` (включая микротексты корзины), это источник истины.
 - **Корзина:** деморежим без бэкенда. Выбор хранится в `localStorage`; телефон вводится в браузере и никуда не отправляется. Не добавлять отправку и сбор данных без отдельного решения.
