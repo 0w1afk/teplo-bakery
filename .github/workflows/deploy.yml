@@ -1,13 +1,8 @@
 name: Deploy
 
-# Ручная выкладка. Запуск: Actions → Deploy → Run workflow (ветка main или тег).
+# Ручная выкладка на https://teplo.zimorodok-dev.ru/.
+# Запуск: Actions → Deploy → Run workflow (ветка main или тег).
 # Проверки прогоняются в этом же запуске, деплой стартует только после них.
-#
-# Почему ручной workflow, а не «кнопка после CI»: required reviewers у environment
-# доступны в приватных репозиториях только на платных тарифах GitHub. На бесплатном
-# тарифе единственный ручной гейт — workflow_dispatch. Если тариф появится,
-# достаточно добавить в environment production правило Required reviewers:
-# деплой-джоба будет ждать подтверждения, ничего в YAML менять не нужно.
 on:
   workflow_dispatch:
 
@@ -24,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
-      SITE_BASE: /${{ vars.PROJECT_SLUG || github.event.repository.name }}
+      SITE_URL: https://teplo.zimorodok-dev.ru
+      SITE_INDEXABLE: 'false'
     steps:
       - uses: actions/checkout@v7
 
@@ -49,7 +44,7 @@ jobs:
       - name: Тесты
         run: npm test --if-present
 
-      - name: Сборка под https://landingmania.ru/${{ env.PROJECT }}/
+      - name: Сборка под https://teplo.zimorodok-dev.ru/
         run: npm run build
 
       - name: Артефакт сборки
@@ -61,7 +56,7 @@ jobs:
           retention-days: 7
 
   deploy:
-    name: Деплой на landingmania.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
+    name: Деплой на teplo.zimorodok-dev.ru
     needs: verify
     # Деплой только с main или с тега (тег — способ откатиться на старый коммит).
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
@@ -69,9 +64,7 @@ jobs:
     timeout-minutes: 10
     environment:
       name: production
-      url: https://landingmania.ru/${{ vars.PROJECT_SLUG || github.event.repository.name }}/
-    env:
-      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
+      url: https://teplo.zimorodok-dev.ru/
     steps:
       - name: Артефакт сборки
         uses: actions/download-artifact@v8
@@ -90,10 +83,9 @@ jobs:
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-      # На сервере ключ ограничен rrsync: доступна только запись в
-      # /srv/landingmania.ru/sites, shell и остальные каталоги закрыты.
-      - name: Rsync в /srv/landingmania.ru/sites/${{ env.PROJECT }}/
+      # На сервере ключ ограничен rrsync: доступна только запись в /srv/zimorodok-dev.ru.
+      - name: Rsync в /srv/zimorodok-dev.ru/teplo/
         run: |
           rsync -az --delete --delay-updates \
             -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
-            dist/ "deploy@81.163.30.117:$PROJECT/"
+            dist/ deploy@81.163.30.117:teplo/

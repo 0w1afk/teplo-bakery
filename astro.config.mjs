@@ -2,13 +2,15 @@
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 
-// SITE_BASE задаёт GitHub Actions при сборке под https://landingmania.ru/teplo-bakery/.
-// Локально и для собственного домена переменная пустая — сайт собирается от корня.
+// Основной адрес — тестовый поддомен https://teplo.zimorodok-dev.ru/ (base /).
+// SITE_BASE остаётся для демо на GitHub Pages (/teplo-bakery), SITE_URL — для
+// абсолютных адресов в разметке. Локально обе переменные пустые — сайт от корня.
 const base = process.env.SITE_BASE || undefined
+const site = process.env.SITE_URL || 'https://teplo.zimorodok-dev.ru'
 
 export default defineConfig({
+  site,
   base,
-  // site: 'https://example.ru', // нужен для sitemap и абсолютных URL
   integrations: [react()],
   build: {
     // Инлайн CSS в HTML: убирает render-blocking запрос стилей (бюджет LCP)

@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "metrics": "npm run build && FORM=mobile STATIC_DIR=dist lhci autorun && FORM=desktop STATIC_DIR=dist lhci autorun && node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --budgets metrics/budgets.json --out metrics/scroll-desktop.json && node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --mobile --cpu 4 --budgets metrics/budgets.json --out metrics/scroll-mobile.json"
+    "metrics": "npm run build && (FORM=mobile STATIC_DIR=dist lhci autorun; m=$?; FORM=desktop STATIC_DIR=dist lhci autorun; d=$?; node metrics/disable-fireworks.mjs; node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --budgets metrics/budgets.json --out metrics/scroll-desktop.json; s=$?; node metrics/scroll-perf.mjs http://localhost:4321/ --serve \"npm run preview\" --mobile --cpu 4 --budgets metrics/budgets.json --out metrics/scroll-mobile.json; t=$?; echo \"метрики: mobile=$m desktop=$d scroll-desktop=$s scroll-mobile=$t\"; [ $m -eq 0 ] && [ $d -eq 0 ] && [ $s -eq 0 ] && [ $t -eq 0 ])"
   },
   "dependencies": {
     "@astrojs/react": "7.1.1",

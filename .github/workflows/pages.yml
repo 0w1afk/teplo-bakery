@@ -3,6 +3,7 @@ name: Pages
 # Демо на GitHub Pages: https://0w1afk.github.io/teplo-bakery/
 # Источник Pages — GitHub Actions (Settings → Pages → Source: GitHub Actions), не ветка:
 # Pages не умеет собирать Astro, а dist/ в репозиторий не коммитится.
+# Демо закрыто от индексации так же, как и поддомен (SITE_INDEXABLE=false по умолчанию).
 on:
   push:
     branches: [main]
@@ -25,6 +26,8 @@ jobs:
     env:
       # Astro читает base из SITE_BASE (astro.config.mjs)
       SITE_BASE: /teplo-bakery
+      SITE_URL: https://0w1afk.github.io
+      SITE_INDEXABLE: 'false'
     steps:
       - uses: actions/checkout@v7
 

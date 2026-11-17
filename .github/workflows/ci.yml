@@ -1,7 +1,7 @@
 name: CI
 
 # Проверки на каждый пуш и PR. Секреты и деплой сюда не попадают:
-# выкладка — отдельный workflow Deploy (workflow_dispatch), см. DEPLOY.md.
+# выкладка — отдельный workflow Deploy (workflow_dispatch), см. site-fabric/DEPLOY.md.
 on:
   push:
     branches: [main]
@@ -16,15 +16,12 @@ concurrency:
 
 jobs:
   verify:
-    name: Lint, типы, тесты, сборка
+    name: Типы, тесты, сборка
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      # Слаг проекта = имя репозитория. Переопределяется переменной репозитория
-      # PROJECT_SLUG (Settings → Secrets and variables → Actions → Variables),
-      # если адрес должен отличаться от имени репозитория.
-      PROJECT: ${{ vars.PROJECT_SLUG || github.event.repository.name }}
-      SITE_BASE: /${{ vars.PROJECT_SLUG || github.event.repository.name }}
+      SITE_URL: https://teplo.zimorodok-dev.ru
+      SITE_INDEXABLE: 'false'
     steps:
       - uses: actions/checkout@v7
 
@@ -48,6 +45,6 @@ jobs:
       - name: Тесты
         run: npm test --if-present
 
-      # Сборка сразу с base проекта: ловим сломанные абсолютные пути до деплоя.
-      - name: Сборка под https://landingmania.ru/${{ env.PROJECT }}/
+      # Сборка сразу под адрес поддомена: ловим сломанные абсолютные пути до деплоя.
+      - name: Сборка под https://teplo.zimorodok-dev.ru/
         run: npm run build

@@ -12,9 +12,19 @@ const defaults = {
 const file = 'metrics/budgets.json'
 const b = { ...defaults[FORM], ...(fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')).lighthouse?.[FORM] : {}) }
 
+// Старые отчёты этой формы удаляются перед прогоном: иначе в папке копятся
+// HTML/JSON прошлых запусков и непонятно, какой отчёт свежий.
+const outputDir = `metrics/lhci/${FORM}`
+fs.rmSync(outputDir, { recursive: true, force: true })
+
 // Astro (статика): STATIC_DIR=dist. Next: START="npm run start" URL=http://localhost:3000
+// 404/500 не аудируем: у страниц ошибок нет осмысленных SEO/доступности.
 const collect = process.env.STATIC_DIR
-  ? { staticDistDir: process.env.STATIC_DIR }
+  ? {
+      staticDistDir: process.env.STATIC_DIR,
+      ...(process.env.URL ? { url: process.env.URL.split(',') } : {}),
+      autodiscoverUrlBlocklist: ['/404.html', '/500.html'],
+    }
   : { startServerCommand: process.env.START || 'npm run preview', url: (process.env.URL || 'http://localhost:4321/').split(',') }
 
 module.exports = {
@@ -37,6 +47,6 @@ module.exports = {
         'resource-summary:script:size': ['warn', { maxNumericValue: b.scriptKb * 1024 }], // байты, после сжатия при передаче
       },
     },
-    upload: { target: 'filesystem', outputDir: `metrics/lhci/${FORM}` },
+    upload: { target: 'filesystem', outputDir },
   },
 }
